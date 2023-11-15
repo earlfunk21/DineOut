@@ -1,3 +1,4 @@
 [submodule "frontend"]
 	path = frontend
 	url = https://github.com/earlfunk21/DineOut.git
+  branch = frontend
