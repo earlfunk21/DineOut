@@ -1,19 +1,22 @@
 "use client";
 import React, {
+  ReactNode,
 	createContext,
-	ReactNode,
 	useContext,
 	useEffect,
 	useState,
 } from "react";
-import Cookies from "js-cookie";
+import { getUserCookie, removeUserCookie, setUserCookie } from "@/lib/cookies";
+
+const AuthContext = createContext<AuthContextType | undefined>(undefined);
+
 
 enum Role {
 	USER,
 	ADMIN,
 }
 
-type User = {
+export type User = {
 	username?: string | null;
 	isAuthenticated: boolean;
 	token?: string | null;
@@ -31,9 +34,7 @@ type AuthContextType = {
 	isLoading: boolean;
 };
 
-const AuthContext = createContext<AuthContextType | undefined>(undefined);
-
-const defaultUserValue = {
+export const defaultUserValue = {
 	username: null,
 	token: null,
 	role: Role.USER,
@@ -46,29 +47,26 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
 	useEffect(() => {
 		const updateUser = async () => {
-			const storedUser = Cookies.get("user");
-			if (storedUser) {
-				const parsedUser: User = JSON.parse(storedUser);
-				setUser(parsedUser);
-			}
+			const cookiesUser = await getUserCookie();
+			setUser(cookiesUser);
 			setIsLoading(false);
 		};
 
-		setTimeout(updateUser, 500);
+		updateUser();
 	}, []);
 
 	const onLogin = (username: string, token: string, role: Role) => {
 		const newUser: User = { username, token, role, isAuthenticated: true };
 		setUser(newUser);
-		Cookies.set("user", JSON.stringify(newUser), { expires: 7 });
+    setUserCookie(newUser);
 	};
 
 	const onLogout = () => {
-    setIsLoading(true);
+		setIsLoading(true);
 		setTimeout(() => {
 			setUser(defaultUserValue);
-			Cookies.remove("user");
-      setIsLoading(false);
+			removeUserCookie();
+			setIsLoading(false);
 		}, 500);
 	};
 

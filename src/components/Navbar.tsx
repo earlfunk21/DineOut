@@ -10,6 +10,7 @@ import { Loader } from "lucide-react";
 import ProfileMenu from "@/components/ProfileMenu";
 import useScrolled from "@/components/hooks/useScrolled";
 import { Tabs, TabsTrigger, TabsList } from "@/components/ui/tabs";
+import { usePathname } from "next/navigation";
 
 export default function Navbar() {
 	const { user, isLoading } = useAuth();
@@ -79,30 +80,21 @@ const items = [
 ];
 
 export function NavItems() {
+  const pathName = usePathname()
 	return (
 		<>
-			<Tabs defaultValue="home">
-				<TabsList className="bg-transparent">
-					{items.map(item => (
-						<TabsTrigger
-							value={item.value}
-							className="data-[state=active]:bg-transparent data-[state=active]:text-white data-[state=active]:underline"
-							key={item.value}
-							asChild>
-							<Button
-								className="text-white font-bold tracking-wider"
-								variant="link"
-								asChild>
-								<Link
-									href={item.href}
-									className="font-roboto font-bold text-white tracking-wider">
-									{item.name}
-								</Link>
-							</Button>
-						</TabsTrigger>
-					))}
-				</TabsList>
-			</Tabs>
+			{items.map(item => (
+				<Button
+					className={cn("text-white font-bold tracking-wider bg-transparent", pathName === item.href && "underline")}
+					variant="link"
+					asChild>
+					<Link
+						href={item.href}
+						className="font-roboto font-bold text-white tracking-wider">
+						{item.name}
+					</Link>
+				</Button>
+			))}
 		</>
 	);
 }

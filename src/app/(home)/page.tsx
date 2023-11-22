@@ -43,7 +43,7 @@ export default function Home() {
 					/>
 				</div>
 			</div>
-      <Footer className="absolute bottom-0"/>
+			<Footer className="absolute bottom-0" />
 		</div>
 	);
 }
