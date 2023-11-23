@@ -27,6 +27,7 @@ function App() {
       </div>
       <h3>DineOut</h3>
       <p>Restaurant</p>
+      <h4>Welcome to DineOut</h4>
     </>
   )
 }
