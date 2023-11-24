@@ -2,14 +2,13 @@ import React from "react";
 import { Roboto_Slab } from "next/font/google";
 import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
-import LoginForm from "@/components/form/LoginForm";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import RegisterForm from "@/components/form/RegisterForm";
 
 const roboto_slab = Roboto_Slab({ subsets: ["latin"] });
 
-export default function LoginPage() {
+export default function Register() {
 	return (
 		<div className="py-10 flex-1 bg-cornsilk-100 w-96 flex flex-col items-center">
 			<h1 className={cn("text-4xl font-bold", roboto_slab.className)}>Register</h1>

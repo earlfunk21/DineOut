@@ -9,7 +9,6 @@ import useAuth from "@/components/hooks/useAuth";
 import { Loader } from "lucide-react";
 import ProfileMenu from "@/components/ProfileMenu";
 import useScrolled from "@/components/hooks/useScrolled";
-import { Tabs, TabsTrigger, TabsList } from "@/components/ui/tabs";
 import { usePathname } from "next/navigation";
 
 export default function Navbar() {
@@ -28,6 +27,7 @@ export default function Navbar() {
 						src={Logo}
 						alt="DineOut Logo"
 						width={200}
+            priority
 					/>
 
 					<NavItems />
@@ -80,12 +80,16 @@ const items = [
 ];
 
 export function NavItems() {
-  const pathName = usePathname()
+	const pathName = usePathname();
 	return (
 		<>
 			{items.map(item => (
 				<Button
-					className={cn("text-white font-bold tracking-wider bg-transparent", pathName === item.href && "underline")}
+					key={item.value}
+					className={cn(
+						"text-white font-bold tracking-wider bg-transparent",
+						pathName === item.href && "underline"
+					)}
 					variant="link"
 					asChild>
 					<Link

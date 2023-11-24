@@ -55,7 +55,7 @@ export default function LoginForm() {
 			});
 			return;
 		}
-		onLogin(data.username, data.token, data.role);
+		onLogin(data);
 		router.push("/");
 	};
 

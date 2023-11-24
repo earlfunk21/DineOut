@@ -47,6 +47,7 @@ const tagItems = [
 	{ id: 3, name: "Vegetarian" },
 	{ id: 4, name: "Fast Food" },
 	{ id: 5, name: "Seafood" },
+	{ id: 6, name: "Thai" },
 ];
 
 function Tags() {
@@ -54,6 +55,14 @@ function Tags() {
 	const [checkedValues, setCheckedValues] = React.useState<string[]>([]);
 	const { replace } = useRouter();
 	const pathname = usePathname();
+
+	React.useEffect(() => {
+		const tagsParam = searchParams.get("tags");
+		if (tagsParam) {
+			const tags = tagsParam.split(",");
+			setCheckedValues(tags);
+		}
+	}, []);
 
 	React.useEffect(() => {
 		const params = new URLSearchParams(searchParams);
@@ -71,7 +80,7 @@ function Tags() {
 			setCheckedValues(prevValues => prevValues.filter(val => val !== value));
 		}
 	};
-
+  
 	return (
 		<div className="gap-y-3 mb-10 flex flex-col">
 			{tagItems.map(item => (
@@ -82,6 +91,7 @@ function Tags() {
 						name="tags"
 						value={item.name}
 						id={item.name}
+            checked={checkedValues.includes(item.name)}
 						onCheckedChange={isChecked =>
 							handleCheckboxChange(isChecked, item.name)
 						}

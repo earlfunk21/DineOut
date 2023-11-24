@@ -1,6 +1,6 @@
 "use client";
 import React, {
-  ReactNode,
+	ReactNode,
 	createContext,
 	useContext,
 	useEffect,
@@ -10,34 +10,49 @@ import { getUserCookie, removeUserCookie, setUserCookie } from "@/lib/cookies";
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-
-enum Role {
-	USER,
-	ADMIN,
+export enum Role {
+	USER = "USER",
+	ADMIN = "ADMIN",
 }
 
-export type User = {
-	username?: string | null;
-	isAuthenticated: boolean;
-	token?: string | null;
+type Authority = {
+	authority: Role;
+};
+
+export type UserDetails = {
+	id?: number;
+	username?: string;
+	name?: string;
+	email?: string;
+	image?: string;
 	role?: Role;
+	enabled?: true;
+	authorities?: Authority[];
+	credentialsNonExpired?: boolean;
+	accountNonExpired?: boolean;
+	accountNonLocked?: boolean;
+};
+
+export type User = {
+	userDetails?: UserDetails | null;
+	token?: string | null;
+	isAuthenticated?: boolean;
 };
 
 type AuthProviderProps = {
 	children: ReactNode;
 };
 
-type AuthContextType = {
+export type AuthContextType = {
 	user: User;
-	onLogin: (username: string, token: string, role: Role) => void;
-	onLogout: () => void;
+	onLogin: (user: User) => Promise<void>;
+	onLogout: () => Promise<void>;
 	isLoading: boolean;
 };
 
 export const defaultUserValue = {
-	username: null,
+	userDetails: null,
 	token: null,
-	role: Role.USER,
 	isAuthenticated: false,
 };
 
@@ -48,6 +63,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 	useEffect(() => {
 		const updateUser = async () => {
 			const cookiesUser = await getUserCookie();
+			if (!cookiesUser.isAuthenticated) {
+				onLogout();
+			}
 			setUser(cookiesUser);
 			setIsLoading(false);
 		};
@@ -55,19 +73,17 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 		updateUser();
 	}, []);
 
-	const onLogin = (username: string, token: string, role: Role) => {
-		const newUser: User = { username, token, role, isAuthenticated: true };
+	const onLogin = async ({ userDetails, token }: User) => {
+		const newUser: User = { userDetails, token, isAuthenticated: true };
 		setUser(newUser);
-    setUserCookie(newUser);
+		await setUserCookie(newUser);
 	};
 
-	const onLogout = () => {
-		setIsLoading(true);
-		setTimeout(() => {
-			setUser(defaultUserValue);
-			removeUserCookie();
-			setIsLoading(false);
-		}, 500);
+	const onLogout = async () => {
+    setIsLoading(true);
+		setUser(defaultUserValue);
+		await removeUserCookie();
+    setIsLoading(false);
 	};
 
 	const value: AuthContextType = { user, onLogin, onLogout, isLoading };

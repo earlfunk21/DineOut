@@ -5,22 +5,22 @@ import {
 	PopoverContent,
 	PopoverTrigger,
 } from "@/components/ui/popover";
-import { Button } from "@/components/ui/button";
 import { IoMdArrowDropdown } from "react-icons/io";
 import { HiMiniUserCircle } from "react-icons/hi2";
 
 import { cn } from "@/lib/utils";
 import useAuth from "@/components/hooks/useAuth";
-import { Separator } from "@/components/ui/separator";
+import Link from "next/link";
 
 export default function ProfileMenu() {
 	const { user, onLogout } = useAuth();
 	const [open, setOpen] = React.useState(false);
+
 	return (
 		<Popover
 			open={open}
 			onOpenChange={setOpen}>
-			<PopoverTrigger className="bg-red-500 hover:bg-red-400 cursor-pointer flex text-white rounded-md p-2">
+			<PopoverTrigger className="bg-red-500 hover:bg-red-400 cursor-pointer flex text-white rounded-md p-2 drop-shadow-md">
 				<HiMiniUserCircle className="text-4xl " />
 				<IoMdArrowDropdown
 					className={cn(
@@ -33,14 +33,22 @@ export default function ProfileMenu() {
 				<div className="flex flex-col select-none ">
 					<h3 className="p-3">
 						Welcome,
-						<span className="text-red-950 font-bold"> {user.username}!</span>
+						<span className="text-red-950 font-bold">
+							{" "}
+							@{user.userDetails?.username}
+						</span>
 					</h3>
-					<Separator />
-					<div
-						className="flex hover:bg-cornsilk-400 transition-colors duration-300 p-3 cursor-pointer"
+					<Link
+						href="/profile"
+						className="flex hover:bg-red-100 transition-colors duration-300 p-3 cursor-pointer rounded-md">
+						Profile
+					</Link>
+					<Link
+						href="/login"
+						className="flex hover:bg-red-100 transition-colors duration-300 p-3 cursor-pointer rounded-md"
 						onClick={onLogout}>
 						Logout
-					</div>
+					</Link>
 				</div>
 			</PopoverContent>
 		</Popover>

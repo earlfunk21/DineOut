@@ -8,11 +8,9 @@ import Link from "next/link";
 
 const roboto_slab = Roboto_Slab({ subsets: ["latin"] });
 
-export default function LoginPage() {
-  
-  
+export default function Login() {
 	return (
-		<div className="py-10 flex-1 bg-cornsilk-100 w-96 flex flex-col items-center">
+		<div className="py-10 flex-1 bg-cornsilk-100 sm:w-96 w-screen flex flex-col items-center">
 			<h1 className={cn("text-4xl font-bold", roboto_slab.className)}>Login</h1>
 			<p className={cn("mb-5", roboto_slab)}>Welcome to DineOut</p>
 			<LoginForm/>

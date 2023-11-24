@@ -30,6 +30,7 @@ export default function ImageContainer() {
 					<Image
 						src={image}
 						alt="Restaurant Image"
+            key={i}
 						className={cn(
 							"object-cover rounded-lg cursor-pointer",
 							i === current && "border-4 border-red-300 "

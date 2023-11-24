@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Navbar from "@/components/Navbar";
 import FoodImage from "@/assets/image/food.png";
 import SloganImage from "@/assets/image/slogan.png";
 import { Search } from "lucide-react";
