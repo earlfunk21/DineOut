@@ -20,9 +20,7 @@ export default async function Layout({
 						<ProfileNav />
 					</div>
 				</div>
-				<div className="col-span-8 bg-cornsilk-500 rounded-3xl row-span-2 relative">
-					{children}
-				</div>
+				{children}
 			</div>
 		</div>
 	);

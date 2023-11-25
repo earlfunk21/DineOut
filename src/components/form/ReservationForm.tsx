@@ -52,7 +52,7 @@ export default function ReservationForm({
 					<FaLocationDot />
 					<h6>{restaurant.address}</h6>
 				</div>
-				<h1 className="text-4xl font-bold py-5">{restaurant.name}</h1>
+				<h1 className="text-4xl font-bold py-5 text-center">{restaurant.name}</h1>
 				<div className="flex justify-center gap-x-6 w-full items-center">
 					<TimePicker dispatch={dispatch} />
 					<PickPeople dispatch={dispatch} />

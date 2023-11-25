@@ -1,6 +1,8 @@
 import { getRestaurants } from "@/app/action";
 import FilterNav from "@/components/FilterNav";
+import Pagination from "@/components/Pagination";
 import RestaurantCard from "@/components/RestaurantCard";
+import Link from "next/link";
 import React from "react";
 
 export type SearchParams = {
@@ -17,19 +19,30 @@ export default async function Discover({ searchParams }: SearchParams) {
 					<FilterNav />
 				</aside>
 				<div className="ms-[250px] p-14 h-3/4">
-					<h1 className="text-2xl font-bold mb-3">Top Restaurants Near Me <span className="text-sm text-gray-500">( {response.numberOfElements} )</span></h1>
+					<h1 className="text-2xl font-bold mb-3">
+						Top Restaurants Near Me{" "}
+						<span className="text-sm text-gray-500">
+							( {response.numberOfElements} )
+						</span>
+					</h1>
 					<div className="grid grid-cols-4 gap-5">
 						{restaurants.map(restaurant => (
-							<RestaurantCard
-                key={restaurant.id}
-                id={restaurant.id}
-								image={restaurant.images[0]}
-								name={restaurant.name}
-								location={restaurant.address}
-								ratings={restaurant.ratings}
-							/>
+							<Link
+								href={`/restaurant/${restaurant.id}`}
+								key={restaurant.id}>
+								<RestaurantCard
+									image={restaurant.images[0]}
+									name={restaurant.name}
+									location={restaurant.address}
+									ratings={restaurant.ratings}
+								/>
+							</Link>
 						))}
 					</div>
+					<Pagination
+						totalPages={response.totalPages}
+						page={Number(searchParams?.page) || 1}
+					/>
 				</div>
 			</div>
 		</div>

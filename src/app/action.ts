@@ -1,15 +1,16 @@
 "use server";
 
 import { UserDetails } from "@/components/hooks/useAuth";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 
 export async function getRestaurants(query: RestaurantQuery) {
+	const page = Number(query.page) || 0;
 	const params = new URLSearchParams({
 		tags: Array.isArray(query.tags) ? query.tags.join(",") : query.tags || "",
 		ratings: query.ratings || "",
 		cuisine: query.cuisine || "",
 		type: query.type || "",
-		page: query.page || "",
+		page: String(page - 1) || "",
 	});
 
 	const url = `http://localhost:8080/api/restaurants?${params.toString()}`;
@@ -88,7 +89,7 @@ export type ReservationProps = {
 	reservationDate: Date | undefined;
 	note: string;
 	reservationTime: string;
-  countPeople: number
+	countPeople: number;
 };
 
 export async function addReservations(props: ReservationProps) {
@@ -106,4 +107,33 @@ export async function addReservations(props: ReservationProps) {
 		throw new Error("Failed to fetch data");
 	}
 	return response.json();
+}
+
+export async function getReviewsByUserId(id: number | undefined, page: number) {
+	const response = await fetch(
+		`http://localhost:8080/api/users/${id}/reviews?page=${page}`,
+		{
+			method: "GET",
+			cache: "no-cache",
+		}
+	);
+	if (!response.ok) {
+		throw new Error("Failed to fetch data");
+	}
+	return response.json();
+}
+
+export async function getRandomRestaurant() {
+	const response = await fetch("http://localhost:8080/api/restaurants/random", {
+		method: "GET",
+		cache: "no-cache",
+	});
+	if (!response.ok) {
+		throw new Error("Failed to fetch data");
+	}
+	return await response.json();
+}
+
+export async function revalidateRandomRestaurant() {
+	revalidateTag("randomRestaurant");
 }

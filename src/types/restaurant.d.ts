@@ -11,18 +11,7 @@ type Restaurant = {
   address: string;
 };
 
-type Pageable = {
-	pageNumber: number;
-	pageSize: number;
-	sort: {
-		empty: boolean;
-		sorted: boolean;
-		unsorted: boolean;
-	};
-	offset: number;
-	paged: boolean;
-	unpaged: boolean;
-};
+
 
 type ApiResponse = {
 	content: Restaurant[];

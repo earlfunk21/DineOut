@@ -10,6 +10,7 @@ import { Loader } from "lucide-react";
 import ProfileMenu from "@/components/ProfileMenu";
 import useScrolled from "@/components/hooks/useScrolled";
 import { usePathname } from "next/navigation";
+import Randomizer from "@/components/Randomizer";
 
 export default function Navbar() {
 	const { user, isLoading } = useAuth();
@@ -27,13 +28,15 @@ export default function Navbar() {
 						src={Logo}
 						alt="DineOut Logo"
 						width={200}
-            priority
+						priority
 					/>
 
 					<NavItems />
 				</div>
 
 				<div className="flex gap-5 items-center">
+					<Randomizer />
+
 					{!isLoading ? (
 						user.isAuthenticated ? (
 							<ProfileMenu />
@@ -71,11 +74,6 @@ const items = [
 		name: "Discover",
 		href: "/discover",
 		value: "discover",
-	},
-	{
-		name: "Randomizer",
-		href: "#",
-		value: "randomizer",
 	},
 ];
 
