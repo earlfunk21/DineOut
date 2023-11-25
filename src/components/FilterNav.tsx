@@ -10,6 +10,7 @@ import { GrRestaurant } from "react-icons/gr";
 import { Checkbox } from "@/components/ui/checkbox";
 import { CheckedState } from "@radix-ui/react-checkbox";
 import { RiRestaurantLine } from "react-icons/ri";
+import useFilterParams from "@/components/hooks/useFilterParams";
 
 export default function FilterNav() {
 	return (
@@ -38,6 +39,39 @@ export default function FilterNav() {
 				<Cuisines />
 			</div>
 		</ScrollArea>
+	);
+}
+
+function FilterGroup({
+	items,
+	paramName,
+}: {
+	items: { id: number; name: string }[];
+	paramName: string;
+}) {
+	const { defaultValue, handleFilterChange } = useFilterParams(paramName);
+
+	return (
+		<RadioGroup
+			defaultValue={defaultValue}
+			onValueChange={handleFilterChange}
+			className="gap-y-3 mb-4">
+			{items.map(item => (
+				<div
+					className="flex items-center space-x-2"
+					key={item.id}>
+					<RadioGroupItem
+						value={item.name}
+						id={item.name}
+					/>
+					<Label
+						htmlFor={item.name}
+						className="cursor-pointer">
+						{item.name}
+					</Label>
+				</div>
+			))}
+		</RadioGroup>
 	);
 }
 
@@ -108,283 +142,50 @@ function Tags() {
 	);
 }
 
-function Types() {
-	const searchParams = useSearchParams();
-	const { replace } = useRouter();
-	const pathname = usePathname();
-	const params = new URLSearchParams(searchParams);
-
-	const handleType = (value: string) => {
-		if (value === "All") {
-			params.delete("type");
-		} else {
-			params.set("type", value);
-		}
-		replace(`${pathname}?${params.toString()}`);
-	};
-
+function Ratings() {
 	return (
-		<RadioGroup
-			defaultValue={params.get("type") || "All"}
-			onValueChange={handleType}
-			className="gap-y-3 mb-4">
-			<div className="flex items-center space-x-2">
-				<RadioGroupItem
-					value="All"
-					id="All"
-				/>
-				<Label
-					htmlFor="All"
-					className="cursor-pointer">
-					All
-				</Label>
-			</div>
-			<div className="flex items-center space-x-2">
-				<RadioGroupItem
-					value="Cafe"
-					id="Cafe"
-				/>
-				<Label
-					htmlFor="Cafe"
-					className="cursor-pointer">
-					Cafe
-				</Label>
-			</div>
-			<div className="flex items-center space-x-2">
-				<RadioGroupItem
-					value="Bar"
-					id="Bar"
-				/>
-				<Label
-					htmlFor="Bar"
-					className="cursor-pointer">
-					Bar
-				</Label>
-			</div>
-			<div className="flex items-center space-x-2">
-				<RadioGroupItem
-					value="Bakery"
-					id="Bakery"
-				/>
-				<Label
-					htmlFor="Bakery"
-					className="cursor-pointer">
-					Bakery
-				</Label>
-			</div>
-			<div className="flex items-center space-x-2">
-				<RadioGroupItem
-					value="Pizzeria"
-					id="Pizzeria"
-				/>
-				<Label
-					htmlFor="Pizzeria"
-					className="cursor-pointer">
-					Pizzeria
-				</Label>
-			</div>
-			<div className="flex items-center space-x-2">
-				<RadioGroupItem
-					value="Outdoor"
-					id="Outdoor"
-				/>
-				<Label
-					htmlFor="Outdoor"
-					className="cursor-pointer">
-					Outdoor
-				</Label>
-			</div>
-		</RadioGroup>
+		<FilterGroup
+			items={[
+				{ id: 1, name: "All" },
+				{ id: 2, name: "5" },
+				{ id: 3, name: "4" },
+				{ id: 4, name: "3" },
+				{ id: 5, name: "2" },
+				{ id: 6, name: "1" },
+			]}
+			paramName="ratings"
+		/>
 	);
 }
 
-function Ratings() {
-	const searchParams = useSearchParams();
-	const { replace } = useRouter();
-	const pathname = usePathname();
-	const params = new URLSearchParams(searchParams);
-
-	const handleRatings = (value: string) => {
-		if (value === "All") {
-			params.delete("ratings");
-		} else {
-			params.set("ratings", value);
-		}
-		replace(`${pathname}?${params.toString()}`);
-	};
-
+function Types() {
 	return (
-		<RadioGroup
-			defaultValue={params.get("ratings") || "All"}
-			onValueChange={handleRatings}
-			className="gap-y-3 mb-4">
-			<div className="flex items-center space-x-2">
-				<RadioGroupItem
-					value="All"
-					id="All"
-				/>
-				<Label
-					htmlFor="All"
-					className="cursor-pointer">
-					All
-				</Label>
-			</div>
-			<div className="flex items-center space-x-2">
-				<RadioGroupItem
-					value="5"
-					id="5"
-				/>
-				<Label
-					htmlFor="5"
-					className="cursor-pointer">
-					5 star
-				</Label>
-			</div>
-			<div className="flex items-center space-x-2">
-				<RadioGroupItem
-					value="4"
-					id="4"
-				/>
-				<Label
-					htmlFor="4"
-					className="cursor-pointer">
-					4 star
-				</Label>
-			</div>
-			<div className="flex items-center space-x-2">
-				<RadioGroupItem
-					value="3"
-					id="3"
-				/>
-				<Label
-					htmlFor="3"
-					className="cursor-pointer">
-					3 star
-				</Label>
-			</div>
-			<div className="flex items-center space-x-2">
-				<RadioGroupItem
-					value="2"
-					id="2"
-				/>
-				<Label
-					htmlFor="2"
-					className="cursor-pointer">
-					2 star
-				</Label>
-			</div>
-			<div className="flex items-center space-x-2">
-				<RadioGroupItem
-					value="1"
-					id="1"
-				/>
-				<Label
-					htmlFor="1"
-					className="cursor-pointer">
-					1 star
-				</Label>
-			</div>
-		</RadioGroup>
+		<FilterGroup
+			items={[
+				{ id: 1, name: "All" },
+				{ id: 2, name: "Cafe" },
+				{ id: 3, name: "Bar" },
+				{ id: 4, name: "Bakery" },
+				{ id: 5, name: "Pizzeria" },
+				{ id: 6, name: "Outdoor" },
+			]}
+			paramName="type"
+		/>
 	);
 }
 
 function Cuisines() {
-	const searchParams = useSearchParams();
-	const { replace } = useRouter();
-	const pathname = usePathname();
-	const params = new URLSearchParams(searchParams);
-
-	const handleRatings = (value: string) => {
-		if (value === "All") {
-			params.delete("cuisine");
-		} else {
-			params.set("cuisine", value);
-		}
-		replace(`${pathname}?${params.toString()}`);
-	};
-
 	return (
-		<RadioGroup
-			defaultValue={params.get("type") || "All"}
-			onValueChange={handleRatings}
-			className="gap-y-3 mb-4">
-			<div className="flex items-center space-x-2">
-				<RadioGroupItem
-					value="All"
-					id="All"
-				/>
-				<Label
-					htmlFor="All"
-					className="cursor-pointer">
-					All
-				</Label>
-			</div>
-			<div className="flex items-center space-x-2">
-				<RadioGroupItem
-					value="Filipino"
-					id="Filipino"
-				/>
-				<Label
-					htmlFor="Filipino"
-					className="cursor-pointer">
-					Filipino
-				</Label>
-			</div>
-			<div className="flex items-center space-x-2">
-				<RadioGroupItem
-					value="Indian"
-					id="Indian"
-				/>
-				<Label
-					htmlFor="Indian"
-					className="cursor-pointer">
-					Indian
-				</Label>
-			</div>
-			<div className="flex items-center space-x-2">
-				<RadioGroupItem
-					value="Japanese"
-					id="Japanese"
-				/>
-				<Label
-					htmlFor="Japanese"
-					className="cursor-pointer">
-					Japanese
-				</Label>
-			</div>
-			<div className="flex items-center space-x-2">
-				<RadioGroupItem
-					value="Chinese"
-					id="Chinese"
-				/>
-				<Label
-					htmlFor="Chinese"
-					className="cursor-pointer">
-					Chinese
-				</Label>
-			</div>
-			<div className="flex items-center space-x-2">
-				<RadioGroupItem
-					value="Korean"
-					id="Korean"
-				/>
-				<Label
-					htmlFor="Korean"
-					className="cursor-pointer">
-					Korean
-				</Label>
-			</div>
-			<div className="flex items-center space-x-2">
-				<RadioGroupItem
-					value="Italian"
-					id="Italian"
-				/>
-				<Label
-					htmlFor="Italian"
-					className="cursor-pointer">
-					Italian
-				</Label>
-			</div>
-		</RadioGroup>
+		<FilterGroup
+			items={[
+				{ id: 1, name: "All" },
+				{ id: 2, name: "Filipino" },
+				{ id: 3, name: "Indian" },
+				{ id: 4, name: "Japanese" },
+				{ id: 5, name: "Italian" },
+				{ id: 6, name: "Korean" },
+			]}
+			paramName="cuisine"
+		/>
 	);
 }

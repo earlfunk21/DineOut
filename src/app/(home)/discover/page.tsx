@@ -17,7 +17,7 @@ export default async function Discover({ searchParams }: SearchParams) {
 					<FilterNav />
 				</aside>
 				<div className="ms-[250px] p-14 h-3/4">
-					<h1 className="text-2xl font-bold mb-3">Top Restaurants Near Me</h1>
+					<h1 className="text-2xl font-bold mb-3">Top Restaurants Near Me <span className="text-sm text-gray-500">( {response.numberOfElements} )</span></h1>
 					<div className="grid grid-cols-4 gap-5">
 						{restaurants.map(restaurant => (
 							<RestaurantCard
@@ -25,7 +25,7 @@ export default async function Discover({ searchParams }: SearchParams) {
                 id={restaurant.id}
 								image={restaurant.images[0]}
 								name={restaurant.name}
-								location="Cebu City"
+								location={restaurant.address}
 								ratings={restaurant.ratings}
 							/>
 						))}

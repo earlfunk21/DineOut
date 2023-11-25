@@ -1,5 +1,6 @@
 "use client";
 import { addReviews } from "@/app/action";
+import TimePicker from "@/components/TimePicker";
 import useAuth from "@/components/hooks/useAuth";
 import { Button } from "@/components/ui/button";
 import { toast } from "@/components/ui/use-toast";
@@ -9,7 +10,7 @@ import { MdOutlineStar } from "react-icons/md";
 
 export default function ReviewForm({ id }: { id: number }) {
 	const textAreaRef = React.useRef<HTMLTextAreaElement>(null);
-	const [rating, setRating] = useState(0);
+	const [rating, setRating] = useState(5);
 	const { user } = useAuth();
 
 	const handleTextAreaInput = () => {
@@ -30,14 +31,6 @@ export default function ReviewForm({ id }: { id: number }) {
 			});
 			return;
 		}
-		if (!rating) {
-			toast({
-				title: "Rating is required",
-				variant: "destructive",
-				description: "Please try again",
-			});
-			return;
-		}
 		await addReviews(id, {
 			userId: user.userDetails?.id,
 			comment: textAreaRef.current?.value,
@@ -46,7 +39,7 @@ export default function ReviewForm({ id }: { id: number }) {
 		if (textAreaRef.current) {
 			textAreaRef.current.value = "";
 		}
-		setRating(0);
+		setRating(5);
 	};
 
 	return (

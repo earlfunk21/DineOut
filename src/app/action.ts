@@ -67,9 +67,9 @@ export async function addReviews(id: number, props: AddReviewProps) {
 		`http://localhost:8080/api/restaurants/${id}/reviews`,
 		{
 			method: "POST",
-      headers: {
-        'Content-Type': "application/json"
-      },
+			headers: {
+				"Content-Type": "application/json",
+			},
 			body: JSON.stringify({
 				...props,
 			}),
@@ -78,6 +78,32 @@ export async function addReviews(id: number, props: AddReviewProps) {
 	if (!response.ok) {
 		throw new Error("Failed to fetch data");
 	}
-  revalidatePath("/restaurant/[]", "page")
+	revalidatePath("/restaurant/[]", "page");
+	return response.json();
+}
+
+export type ReservationProps = {
+	restaurantId: number;
+	userId?: number;
+	reservationDate: Date | undefined;
+	note: string;
+	reservationTime: string;
+  countPeople: number
+};
+
+export async function addReservations(props: ReservationProps) {
+	const response = await fetch(`http://localhost:8080/api/reservations`, {
+		method: "POST",
+		cache: "no-cache",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify({
+			...props,
+		}),
+	});
+	if (!response.ok) {
+		throw new Error("Failed to fetch data");
+	}
 	return response.json();
 }

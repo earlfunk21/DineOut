@@ -33,7 +33,7 @@ export default function ReviewCard({ review }: { review: Review }) {
 							key={i}
 							className={cn(
 								"w-5 h-5 text-red-500",
-								i + 1 >= review.rating && "text-gray-400"
+								i  >= review.rating && "text-gray-400"
 							)}
 						/>
 					))}

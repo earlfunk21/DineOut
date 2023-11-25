@@ -1,5 +1,6 @@
 import { getRestaurant } from "@/app/action";
 import ImageContainer from "@/components/ImageContainer";
+import ReserveDialog from "@/components/ReserveDialog";
 import ReviewsDialog from "@/components/ReviewsDialog";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -33,7 +34,7 @@ export default async function Restaurant({
 										key={i}
 										className={cn(
 											"w-5 h-5 text-red-500",
-											i + 1 >= restaurant.ratings && "text-gray-400"
+											i >= restaurant.ratings && "text-gray-400"
 										)}
 									/>
 								))}
@@ -59,12 +60,7 @@ export default async function Restaurant({
 						</p>
 					</div>
 					<div className="flex gap-x-12">
-						<Button
-							variant="primary"
-							size="lg"
-							className="w-full drop-shadow-md">
-							Reserve
-						</Button>
+						<ReserveDialog restaurant={restaurant}/>
 						<ReviewsDialog id={id} />
 					</div>
 				</div>

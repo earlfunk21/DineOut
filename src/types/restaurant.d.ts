@@ -8,6 +8,7 @@ type Restaurant = {
 	cuisine: any;
 	images: any[];
 	ratings: number;
+  address: string;
 };
 
 type Pageable = {

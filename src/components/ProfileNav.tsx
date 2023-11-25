@@ -31,7 +31,7 @@ export default function ProfileNav() {
 	return (
 		<>
 			{items.map(item => (
-				<Link href={item.href}>
+				<Link href={item.href} key={item.href}>
 					<div
 						key={item.name}
 						className="flex gap-x-2 text-gray-400 text-xl items-center">
