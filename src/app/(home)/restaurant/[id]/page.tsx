@@ -34,7 +34,7 @@ export default async function Restaurant({
 										key={i}
 										className={cn(
 											"w-5 h-5 text-red-500",
-											i >= restaurant.ratings && "text-gray-400"
+											i >= (restaurant.ratings !== 0 ? restaurant.ratings : 5) && "text-gray-400"
 										)}
 									/>
 								))}

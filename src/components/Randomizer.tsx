@@ -85,7 +85,7 @@ export function Picked({ setClose }: { setClose: () => void }) {
 						image={restaurant.images[0]}
 						name={restaurant.name}
 						location={restaurant.address}
-						ratings={restaurant.ratings}
+						ratings={restaurant.ratings !== 0 ? restaurant.ratings : 5}
             className="items-center"
 					/>
 				)}

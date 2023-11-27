@@ -1,4 +1,7 @@
+"use client";
+import LoginMessage from "@/components/LoginMessage";
 import ReservationForm from "@/components/form/ReservationForm";
+import useAuth from "@/components/hooks/useAuth";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import React from "react";
@@ -8,8 +11,15 @@ export default function ReserveDialog({
 }: {
 	restaurant: Restaurant;
 }) {
+  const [open, setOpen] = React.useState(false);
+  const { user } = useAuth();
+  if(open && !user.isAuthenticated) {
+    LoginMessage();
+    setOpen(false)
+  }
+
 	return (
-		<Dialog>
+		<Dialog open={open} onOpenChange={setOpen}>
 			<DialogTrigger asChild>
 				<Button
 					variant="primary"

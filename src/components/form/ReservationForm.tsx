@@ -29,7 +29,7 @@ export default function ReservationForm({
 			reservationTime: state.reservationTime,
 			countPeople: state.people,
 		};
-		// await addReservations(data);
+		await addReservations(data);
 		toast({
 			title: "CONGRATULATIONS!",
 			description: "Your reservation has been successfully confirmed. Enjoy!",

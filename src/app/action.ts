@@ -106,6 +106,7 @@ export async function addReservations(props: ReservationProps) {
 	if (!response.ok) {
 		throw new Error("Failed to fetch data");
 	}
+	revalidateTag("cancel-reservation");
 	return response.json();
 }
 
@@ -134,6 +135,35 @@ export async function getRandomRestaurant() {
 	return await response.json();
 }
 
-export async function revalidateRandomRestaurant() {
-	revalidateTag("randomRestaurant");
+export async function getReservationsByUser(
+	userId: number | undefined,
+	page: number
+) {
+	const response = await fetch(
+		`http://localhost:8080/api/users/${userId}/reservations?page=${page}`,
+		{
+			method: "GET",
+			next: {
+				tags: ["cancel-reservation"],
+        revalidate: 3600
+			},
+		}
+	);
+	if (!response.ok) {
+		throw new Error("Failed to fetch data");
+	}
+	return await response.json();
+}
+
+export async function cancelReservation(reservationId: number) {
+	const response = await fetch(
+		`http://localhost:8080/api/reservations/${reservationId}/cancel`,
+		{
+			method: "PUT",
+		}
+	);
+	if (!response.ok) {
+		throw new Error("Failed to fetch data");
+	}
+	revalidateTag("cancel-reservation");
 }

@@ -5,6 +5,7 @@ import useAuth from "@/components/hooks/useAuth";
 import { Button } from "@/components/ui/button";
 import { toast } from "@/components/ui/use-toast";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
 import React, { useState } from "react";
 import { MdOutlineStar } from "react-icons/md";
 
@@ -41,6 +42,19 @@ export default function ReviewForm({ id }: { id: number }) {
 		}
 		setRating(5);
 	};
+
+	if (!user.isAuthenticated) {
+		return (
+			<div className="w-full bg-white p-4 rounded-lg flex-col flex">
+				<h1 className="text-center font-semibold text-2xl">
+					Please log in to add review 
+				</h1>
+				<Link href="/login" className="text-center">
+					<Button variant="link">Click here to Login</Button>
+				</Link>
+			</div>
+		);
+	}
 
 	return (
 		<div className="w-full bg-white flex p-4 rounded-lg">

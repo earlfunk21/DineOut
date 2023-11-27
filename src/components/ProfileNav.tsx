@@ -15,8 +15,8 @@ const items = [
 		icon: <FaUser />,
 	},
 	{
-		name: "RESTAURANT VISITED",
-		href: "/profile/visited",
+		name: "RESERVATIONS",
+		href: "/profile/reservations",
 		icon: <ImSpoonKnife />,
 	},
 	{

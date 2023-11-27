@@ -40,7 +40,8 @@ export default function ProfileMenu() {
 					</h3>
 					<Link
 						href="/profile"
-						className="flex hover:bg-red-100 transition-colors duration-300 p-3 cursor-pointer rounded-md">
+						className="flex hover:bg-red-100 transition-colors duration-300 p-3 cursor-pointer rounded-md"
+            onClick={() => setOpen(false)}>
 						Profile
 					</Link>
 					<Link
