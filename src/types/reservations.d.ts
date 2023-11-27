@@ -46,7 +46,7 @@ type Reservation = {
   reservationTime: string | null;
   note: string | null;
   countPeople: number | null;
-  status: string;
+  cancelled: boolean;
   restaurant: Restaurant;
   user: User;
 };
