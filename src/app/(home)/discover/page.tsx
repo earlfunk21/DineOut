@@ -20,7 +20,7 @@ export default async function Discover({ searchParams }: SearchParams) {
 				<aside className="h-full top-[140px] w-[250px] max-w-[250px]">
 					<FilterNav />
 				</aside>
-				<div className="py-14 h-3/4">
+				<div className="py-14 h-3/4 w-full">
 					<h1 className="text-2xl font-bold mb-3">
 						Top Restaurants Near Me{" "}
 						<span className="text-sm text-gray-500">

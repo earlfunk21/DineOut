@@ -10,6 +10,7 @@ export async function getRestaurants(query: RestaurantQuery) {
 		ratings: query.ratings || "",
 		cuisine: query.cuisine || "",
 		type: query.type || "",
+		search: query.search || "",
 		page: String(page - 1) || "",
 	});
 

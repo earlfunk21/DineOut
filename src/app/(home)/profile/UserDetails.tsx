@@ -35,7 +35,7 @@ export default function UserDetails() {
 			</div>
 			<div className="flex">
 				<h1 className="w-48 text-2xl font-bold">Name</h1>
-				<h3 className="text-xl text-gray-500">{user.userDetails?.name}</h3>
+				<h3 className="text-xl text-gray-500 capitalize">{user.userDetails?.name}</h3>
 			</div>
 			<div className="flex">
 				<h1 className="w-48 text-2xl font-bold">Email</h1>

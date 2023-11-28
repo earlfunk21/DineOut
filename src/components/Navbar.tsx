@@ -11,6 +11,8 @@ import ProfileMenu from "@/components/ProfileMenu";
 import useScrolled from "@/components/hooks/useScrolled";
 import { usePathname } from "next/navigation";
 import Randomizer from "@/components/Randomizer";
+import { Input } from "@/components/ui/input";
+import SearchInput from "@/components/SearchInput";
 
 export default function Navbar() {
 	const { user, isLoading } = useAuth();
@@ -36,7 +38,7 @@ export default function Navbar() {
 
 				<div className="flex gap-5 items-center">
 					<Randomizer />
-
+          <SearchInput />
 					{!isLoading ? (
 						user.isAuthenticated ? (
 							<ProfileMenu />

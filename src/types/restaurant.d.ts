@@ -37,4 +37,5 @@ type RestaurantQuery = {
 	cuisine?: string | undefined;
 	type?: string | undefined;
 	page?: string | undefined;
+  search?: string | undefined;
 };
