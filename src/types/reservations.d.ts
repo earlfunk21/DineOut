@@ -23,7 +23,7 @@ type Restaurant = {
   type: RestaurantType;
   cuisine: Cuisine;
   images: string[]; // Assuming these are URLs to images
-  averageRating: number;
+  ratings: number;
 };
 
 type User = {

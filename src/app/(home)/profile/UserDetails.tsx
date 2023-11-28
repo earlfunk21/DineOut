@@ -10,54 +10,37 @@ export default function UserDetails() {
 
 	if (isLoading) {
 		return (
-			<>
-				<div className="flex flex-col py-16 gap-y-16 relative">
-					<div className="flex">
-						<h1 className="w-48 text-2xl font-bold">Username</h1>
-						<Skeleton className="h-[28px] w-[250px] bg-orange-300" />
-					</div>
-					<div className="flex">
-						<h1 className="w-48 text-2xl font-bold">Name</h1>
-						<Skeleton className="h-[28px] w-[250px] bg-orange-300" />
-					</div>
-					<div className="flex">
-						<h1 className="w-48 text-2xl font-bold">Email</h1>
-						<Skeleton className="h-[28px] w-[250px] bg-orange-300" />
-					</div>
+			<div className="flex flex-col py-16 gap-y-16 relative">
+				<div className="flex">
+					<h1 className="w-48 text-2xl font-bold">Username</h1>
+					<Skeleton className="h-[28px] w-[250px] bg-orange-300" />
 				</div>
-				<Button
-					className="absolute -bottom-16 right-0 w-28"
-					size="lg"
-					variant="primary">
-				</Button>
-			</>
+				<div className="flex">
+					<h1 className="w-48 text-2xl font-bold">Name</h1>
+					<Skeleton className="h-[28px] w-[250px] bg-orange-300" />
+				</div>
+				<div className="flex">
+					<h1 className="w-48 text-2xl font-bold">Email</h1>
+					<Skeleton className="h-[28px] w-[250px] bg-orange-300" />
+				</div>
+			</div>
 		);
 	}
 
 	return (
-		<>
-			<div className="flex flex-col py-16 gap-y-16 relative">
-				<div className="flex">
-					<h1 className="w-48 text-2xl font-bold">Username</h1>
-					<h3 className="text-xl text-gray-500">
-						{user.userDetails?.username}
-					</h3>
-				</div>
-				<div className="flex">
-					<h1 className="w-48 text-2xl font-bold">Name</h1>
-					<h3 className="text-xl text-gray-500">{user.userDetails?.name}</h3>
-				</div>
-				<div className="flex">
-					<h1 className="w-48 text-2xl font-bold">Email</h1>
-					<h3 className="text-xl text-gray-500">{user.userDetails?.email}</h3>
-				</div>
+		<div className="flex flex-col py-16 gap-y-16 relative">
+			<div className="flex">
+				<h1 className="w-48 text-2xl font-bold">Username</h1>
+				<h3 className="text-xl text-gray-500">{user.userDetails?.username}</h3>
 			</div>
-			<Button
-				className="absolute -bottom-16 right-0 w-28"
-				size="lg"
-				variant="primary">
-				Edit
-			</Button>
-		</>
+			<div className="flex">
+				<h1 className="w-48 text-2xl font-bold">Name</h1>
+				<h3 className="text-xl text-gray-500">{user.userDetails?.name}</h3>
+			</div>
+			<div className="flex">
+				<h1 className="w-48 text-2xl font-bold">Email</h1>
+				<h3 className="text-xl text-gray-500">{user.userDetails?.email}</h3>
+			</div>
+		</div>
 	);
 }

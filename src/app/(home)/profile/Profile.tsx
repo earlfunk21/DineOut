@@ -28,7 +28,7 @@ export default function Profile() {
 	return (
 		<>
 			<ProfilePicture />
-			<h1 className="text-2xl font-extrabold">{user.userDetails?.name}</h1>
+			<h1 className="text-2xl font-extrabold capitalize">{user.userDetails?.name}</h1>
 			<p className="font-semibold text-gray-400">{user.userDetails?.email}</p>
 		</>
 	);

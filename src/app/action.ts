@@ -167,3 +167,19 @@ export async function cancelReservation(reservationId: number) {
 	}
 	revalidateTag("cancel-reservation");
 }
+
+
+export async function updateUser(formData: FormData, userId: number | undefined) {
+	const response = await fetch(
+		`http://localhost:8080/auth/${userId}/user`,
+		{
+			method: "PUT",
+      body: formData
+		}
+	);
+	if (!response.ok) {
+		throw new Error("Failed to fetch data");
+	}
+	revalidatePath("/");
+  return response.json();
+}
