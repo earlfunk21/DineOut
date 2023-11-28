@@ -1,9 +1,10 @@
 import { Button } from "@/components/ui/button";
-import { toast } from "@/components/ui/use-toast";
+import { useToast } from "@/components/ui/use-toast";
 import Link from "next/link";
 import React from "react";
 
 export default function LoginMessage() {
+	const { toast } = useToast();
 	return toast({
 		title: "Login Required",
 		description: (

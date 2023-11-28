@@ -12,8 +12,8 @@ import {
 	FormLabel,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { toast } from "@/components/ui/use-toast";
+import { useToast } from "@/components/ui/use-toast";
+import { zodResolver } from "@hookform/resolvers/zod";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -32,9 +32,11 @@ export default function EditProfileForm({
 }: {
 	closeDialog: () => void;
 }) {
+	const { toast } = useToast();
 	const { user, onLogin } = useAuth();
 	const [file, setFile] = React.useState<File | undefined>(undefined);
 	const form = useForm<FormData>({
+    resolver: zodResolver(formSchema),
 		defaultValues: {
 			username: "",
 			name: "",
@@ -162,7 +164,7 @@ export default function EditProfileForm({
 							<FormLabel>Password</FormLabel>
 							<FormControl>
 								<Input
-                  type="password"
+									type="password"
 									placeholder="*****"
 									{...field}
 									className="col-span-3"

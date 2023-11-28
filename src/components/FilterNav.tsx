@@ -11,6 +11,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { CheckedState } from "@radix-ui/react-checkbox";
 import { RiRestaurantLine } from "react-icons/ri";
 import useFilterParams from "@/components/hooks/useFilterParams";
+import { getTags, getCuisines, getTypes } from "@/app/action";
 
 export default function FilterNav() {
 	return (
@@ -75,28 +76,17 @@ function FilterGroup({
 	);
 }
 
-const tagItems = [
-	{ id: 1, name: "Buffet" },
-	{ id: 2, name: "Fancy" },
-	{ id: 3, name: "Vegetarian" },
-	{ id: 4, name: "Fast Food" },
-	{ id: 5, name: "Seafood" },
-	{ id: 6, name: "Thai" },
-];
+type FilterType = {
+	id: number;
+	name: string;
+};
 
 function Tags() {
 	const searchParams = useSearchParams();
 	const [checkedValues, setCheckedValues] = React.useState<string[]>([]);
 	const { replace } = useRouter();
 	const pathname = usePathname();
-
-	React.useEffect(() => {
-		const tagsParam = searchParams.get("tags");
-		if (tagsParam) {
-			const tags = tagsParam.split(",");
-			setCheckedValues(tags);
-		}
-	}, []);
+	const [items, setItems] = React.useState<FilterType[]>([]);
 
 	React.useEffect(() => {
 		const params = new URLSearchParams(searchParams);
@@ -107,6 +97,19 @@ function Tags() {
 		replace(`${pathname}?${params.toString()}`);
 	}, [checkedValues]);
 
+  
+	React.useEffect(() => {
+		const tagsParam = searchParams.get("tags");
+		if (tagsParam) {
+			const tags = tagsParam.split(",");
+			setCheckedValues(tags);
+		}
+		const fetchItems = async () => {
+			await getTags().then(data => setItems(data));
+		};
+		fetchItems();
+	}, []);
+
 	const handleCheckboxChange = (isChecked: CheckedState, value: string) => {
 		if (isChecked) {
 			setCheckedValues(prevValues => [...prevValues, value]);
@@ -114,10 +117,10 @@ function Tags() {
 			setCheckedValues(prevValues => prevValues.filter(val => val !== value));
 		}
 	};
-  
+
 	return (
 		<div className="gap-y-3 mb-10 flex flex-col">
-			{tagItems.map(item => (
+			{items.map(item => (
 				<div
 					className="flex items-center space-x-2"
 					key={item.id}>
@@ -125,7 +128,7 @@ function Tags() {
 						name="tags"
 						value={item.name}
 						id={item.name}
-            checked={checkedValues.includes(item.name)}
+						checked={checkedValues.includes(item.name)}
 						onCheckedChange={isChecked =>
 							handleCheckboxChange(isChecked, item.name)
 						}
@@ -159,32 +162,38 @@ function Ratings() {
 }
 
 function Types() {
+	const [items, setItems] = React.useState<FilterType[]>([]);
+
+	React.useEffect(() => {
+		const fetchItems = async () => {
+			await getTypes().then(data => setItems(data));
+		};
+
+		fetchItems();
+	}, []);
+
 	return (
 		<FilterGroup
-			items={[
-				{ id: 1, name: "All" },
-				{ id: 2, name: "Cafe" },
-				{ id: 3, name: "Bar" },
-				{ id: 4, name: "Bakery" },
-				{ id: 5, name: "Pizzeria" },
-				{ id: 6, name: "Outdoor" },
-			]}
+			items={items}
 			paramName="type"
 		/>
 	);
 }
 
 function Cuisines() {
+	const [items, setItems] = React.useState<FilterType[]>([]);
+
+	React.useEffect(() => {
+		const fetchItems = async () => {
+			await getCuisines().then(data => setItems(data));
+		};
+
+		fetchItems();
+	}, []);
+
 	return (
 		<FilterGroup
-			items={[
-				{ id: 1, name: "All" },
-				{ id: 2, name: "Filipino" },
-				{ id: 3, name: "Indian" },
-				{ id: 4, name: "Japanese" },
-				{ id: 5, name: "Italian" },
-				{ id: 6, name: "Korean" },
-			]}
+			items={items}
 			paramName="cuisine"
 		/>
 	);

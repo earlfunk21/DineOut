@@ -8,7 +8,7 @@ import useReservation from "@/components/hooks/useReservation";
 import { Button } from "@/components/ui/button";
 import { DialogClose } from "@/components/ui/dialog";
 import { ToastAction } from "@/components/ui/toast";
-import { toast } from "@/components/ui/use-toast";
+import { useToast } from "@/components/ui/use-toast";
 import React from "react";
 import { FaLocationDot } from "react-icons/fa6";
 
@@ -19,6 +19,7 @@ export default function ReservationForm({
 }) {
 	const [state, dispatch] = useReservation();
 	const { user } = useAuth();
+  const { toast } = useToast();
 
 	const handleSubmit = async () => {
 		const data: ReservationProps = {

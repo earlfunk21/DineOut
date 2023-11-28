@@ -13,6 +13,7 @@ import { getRandomRestaurant } from "@/app/action";
 import RestaurantCard from "@/components/RestaurantCard";
 import Link from "next/link";
 import { X } from "lucide-react";
+import { useToast } from "@/components/ui/use-toast";
 
 export default function Randomizer() {
 	const [open, setOpen] = React.useState(false);
@@ -33,8 +34,10 @@ export default function Randomizer() {
 				</Button>
 			</DialogTrigger>
 			<DialogContent className="w-1/2 h-1/2 flex flex-col justify-center items-center px-24 bg-cornsilk-500">
-				<DialogClose className="absolute top-4 right-4"><X/></DialogClose>
-        <Image
+				<DialogClose className="absolute top-4 right-4">
+					<X />
+				</DialogClose>
+				<Image
 					alt="Can't Decide Image"
 					src={CantDecide}
 				/>
@@ -53,21 +56,35 @@ export default function Randomizer() {
 }
 
 export function Picked({ setClose }: { setClose: () => void }) {
+  
+  const { toast } = useToast();
 	const [restaurant, setRestaurant] = React.useState<Restaurant | undefined>(
 		undefined
 	);
 
-  const [open, setOpen] = React.useState(false);
+	const [open, setOpen] = React.useState(false);
 
 	React.useEffect(() => {
 		const fetchRandomRestaurant = async () => {
-			setRestaurant(await getRandomRestaurant());
+			try {
+				setRestaurant(await getRandomRestaurant());
+			} catch (error) {
+				toast({
+					title: "Something is wrong!",
+					description: "Check the restaurants if none",
+          variant: "destructive"
+				});
+			}
 		};
-		fetchRandomRestaurant();
+		if (open) {
+			fetchRandomRestaurant();
+		}
 	}, [open]);
 
 	return (
-		<Dialog open={open} onOpenChange={setOpen}>
+		<Dialog
+			open={open}
+			onOpenChange={setOpen}>
 			<DialogTrigger asChild>
 				<Button
 					variant="primary"
@@ -86,12 +103,12 @@ export function Picked({ setClose }: { setClose: () => void }) {
 						name={restaurant.name}
 						location={restaurant.address}
 						ratings={restaurant.ratings !== 0 ? restaurant.ratings : 5}
-            className="items-center"
+						className="items-center"
 					/>
 				)}
 				<div className="flex gap-x-6">
 					<Button
-            onClick={() => setOpen(false)}
+						onClick={() => setOpen(false)}
 						variant="outline"
 						size="lg"
 						className="w-full text-red-500 border border-red-500 bg-transparent hover:bg-red-500 hover:text-white">

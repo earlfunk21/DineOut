@@ -4,7 +4,7 @@ import Pagination from "@/components/Pagination";
 import RestaurantCard from "@/components/RestaurantCard";
 import { Button } from "@/components/ui/button";
 import { ToastAction } from "@/components/ui/toast";
-import { toast } from "@/components/ui/use-toast";
+import { useToast } from "@/components/ui/use-toast";
 import { format } from "date-fns";
 import Link from "next/link";
 import React from "react";
@@ -14,6 +14,9 @@ export default function Reservations({
 }: {
 	reservations: Reservation[];
 }) {
+  
+  const { toast } = useToast();
+  
 	const getStatus = (cancelled: boolean, date: number) => {
 		const currentTimestamp = Date.now();
 		if (!cancelled && currentTimestamp < date) {

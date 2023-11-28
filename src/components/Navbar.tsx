@@ -11,7 +11,6 @@ import ProfileMenu from "@/components/ProfileMenu";
 import useScrolled from "@/components/hooks/useScrolled";
 import { usePathname } from "next/navigation";
 import Randomizer from "@/components/Randomizer";
-import { Input } from "@/components/ui/input";
 import SearchInput from "@/components/SearchInput";
 
 export default function Navbar() {

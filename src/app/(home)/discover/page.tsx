@@ -1,8 +1,10 @@
 import { getRestaurants } from "@/app/action";
+import AddRestaurantButton from "@/components/AddRestaurantButton";
 import FilterNav from "@/components/FilterNav";
 import Footer from "@/components/Footer";
 import Pagination from "@/components/Pagination";
 import RestaurantCard from "@/components/RestaurantCard";
+import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import React from "react";
 import { FaFacebook, FaInstagram, FaTwitter, FaYoutube } from "react-icons/fa";
@@ -15,18 +17,22 @@ export default async function Discover({ searchParams }: SearchParams) {
 	const response: ApiResponse = await getRestaurants(searchParams || {});
 	const restaurants = response.content;
 	return (
-		<div className="h-screen pt-[140px]">
+		<div className="h-screen pt-[140px] .scroll">
 			<div className="container flex justify-center">
 				<aside className="h-full top-[140px] w-[250px] max-w-[250px]">
 					<FilterNav />
 				</aside>
 				<div className="py-14 h-3/4 w-full">
-					<h1 className="text-2xl font-bold mb-3">
+          <div className="flex justify-between">
+          <h1 className="text-2xl font-bold mb-3">
 						Top Restaurants Near Me{" "}
 						<span className="text-sm text-gray-500">
 							( {response.numberOfElements} )
 						</span>
 					</h1>
+          <AddRestaurantButton />
+          </div>
+					
 					<div className="grid grid-cols-4 gap-5 mb-10">
 						{restaurants.map(restaurant => (
 							<Link

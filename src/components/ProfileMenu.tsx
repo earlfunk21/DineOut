@@ -11,10 +11,22 @@ import { HiMiniUserCircle } from "react-icons/hi2";
 import { cn } from "@/lib/utils";
 import useAuth from "@/components/hooks/useAuth";
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { useToast } from "@/components/ui/use-toast";
 
 export default function ProfileMenu() {
+  const { toast } = useToast();
 	const { user, onLogout } = useAuth();
 	const [open, setOpen] = React.useState(false);
+
+  const handleLogout = async () => {
+    await onLogout();
+    toast({
+      title: "Successfully logged out",
+      description: "You may logged in",
+      variant: "success"
+    })
+  }
 
 	return (
 		<Popover
@@ -40,16 +52,16 @@ export default function ProfileMenu() {
 					</h3>
 					<Link
 						href="/profile"
-						className="flex hover:bg-red-100 transition-colors duration-300 p-3 cursor-pointer rounded-md"
-            onClick={() => setOpen(false)}>
+						className="flex hover:bg-red-100 transition-colors duration-300 p-3 cursor-pointer rounded-md text-sm font-medium"
+						onClick={() => setOpen(false)}>
 						Profile
 					</Link>
-					<Link
-						href="/login"
-						className="flex hover:bg-red-100 transition-colors duration-300 p-3 cursor-pointer rounded-md"
-						onClick={onLogout}>
+					<Button
+						variant="ghost"
+						className="flex hover:bg-red-100 transition-colors duration-300 p-3 cursor-pointer rounded-md justify-start text-sm font-medium"
+						onClick={handleLogout}>
 						Logout
-					</Link>
+					</Button>
 				</div>
 			</PopoverContent>
 		</Popover>
