@@ -57,6 +57,19 @@ function FilterGroup({
 			defaultValue={defaultValue}
 			onValueChange={handleFilterChange}
 			className="gap-y-3 mb-4">
+        <div
+					className="flex items-center space-x-2"
+					key="All">
+					<RadioGroupItem
+						value="All"
+						id="All"
+					/>
+					<Label
+						htmlFor="All"
+						className="cursor-pointer">
+						All
+					</Label>
+				</div>
 			{items.map(item => (
 				<div
 					className="flex items-center space-x-2"
@@ -149,7 +162,6 @@ function Ratings() {
 	return (
 		<FilterGroup
 			items={[
-				{ id: 1, name: "All" },
 				{ id: 2, name: "5" },
 				{ id: 3, name: "4" },
 				{ id: 4, name: "3" },

@@ -19,7 +19,7 @@ export default async function Restaurant({
 		<div className="h-screen pt-[140px] flex justify-center items-center bg-orange-500">
 			<div className="container h-full py-10 grid grid-cols-12 gap-x-12">
 				<div className="col-span-5">
-					<ImageContainer />
+					<ImageContainer images={restaurant.images}/>
 				</div>
 				<div className="col-span-4 flex flex-col justify-between">
 					<div>
