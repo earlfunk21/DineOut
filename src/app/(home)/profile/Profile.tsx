@@ -4,10 +4,16 @@ import ProfilePicture from "@/components/ProfilePicture";
 import useAuth from "@/components/hooks/useAuth";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 export default function Profile() {
 	const { user, isLoading } = useAuth();
+  const { push } = useRouter();
+
+  if(!user.isAuthenticated){
+    push("/");
+  }
 
 	if (isLoading) {
 		return (

@@ -57,19 +57,6 @@ function FilterGroup({
 			defaultValue={defaultValue}
 			onValueChange={handleFilterChange}
 			className="gap-y-3 mb-4">
-        <div
-					className="flex items-center space-x-2"
-					key="All">
-					<RadioGroupItem
-						value="All"
-						id="All"
-					/>
-					<Label
-						htmlFor="All"
-						className="cursor-pointer">
-						All
-					</Label>
-				</div>
 			{items.map(item => (
 				<div
 					className="flex items-center space-x-2"
@@ -110,7 +97,6 @@ function Tags() {
 		replace(`${pathname}?${params.toString()}`);
 	}, [checkedValues]);
 
-  
 	React.useEffect(() => {
 		const tagsParam = searchParams.get("tags");
 		if (tagsParam) {
@@ -162,6 +148,7 @@ function Ratings() {
 	return (
 		<FilterGroup
 			items={[
+				{ id: 1, name: "All" },
 				{ id: 2, name: "5" },
 				{ id: 3, name: "4" },
 				{ id: 4, name: "3" },
@@ -174,11 +161,13 @@ function Ratings() {
 }
 
 function Types() {
-	const [items, setItems] = React.useState<FilterType[]>([]);
+	const [items, setItems] = React.useState<FilterType[]>([
+		{ id: 0, name: "All" },
+	]);
 
 	React.useEffect(() => {
 		const fetchItems = async () => {
-			await getTypes().then(data => setItems(data));
+			await getTypes().then(data => setItems(prev => [...prev, ...data]));
 		};
 
 		fetchItems();
@@ -193,11 +182,13 @@ function Types() {
 }
 
 function Cuisines() {
-	const [items, setItems] = React.useState<FilterType[]>([]);
+	const [items, setItems] = React.useState<FilterType[]>([
+		{ id: 0, name: "All" },
+	]);
 
 	React.useEffect(() => {
 		const fetchItems = async () => {
-			await getCuisines().then(data => setItems(data));
+			await getCuisines().then(data => setItems(prev => [...prev, ...data]));
 		};
 
 		fetchItems();
