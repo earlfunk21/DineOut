@@ -56,10 +56,9 @@ export const defaultUserValue = {
 	isAuthenticated: false,
 };
 
-export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
+export const AuthProvider = ({ children }: AuthProviderProps) => {
 	const [user, setUser] = useState<User>(defaultUserValue);
 	const [isLoading, setIsLoading] = useState<boolean>(true);
-
 	useEffect(() => {
 		const updateUser = async () => {
 			const cookiesUser = await getUserCookie();
@@ -69,22 +68,24 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 			setUser(cookiesUser);
 			setIsLoading(false);
 		};
-
 		updateUser();
 	}, []);
 
-	const onLogin = async ({ userDetails, token }: User) => {
-		const newUser: User = { userDetails, token, isAuthenticated: true };
-		setUser(newUser);
-		await setUserCookie(newUser);
-	};
+	const onLogin = React.useCallback(
+		async ({ userDetails, token }: User) => {
+			const newUser: User = { userDetails, token, isAuthenticated: true };
+			setUser(newUser);
+			await setUserCookie(newUser);
+		},
+		[user.isAuthenticated]
+	);
 
-	const onLogout = async () => {
-    setIsLoading(true);
-		setUser(defaultUserValue);
+	const onLogout = React.useCallback(async () => {
+		setIsLoading(true);
 		await removeUserCookie();
-    setIsLoading(false);
-	};
+		setUser(defaultUserValue);
+		setIsLoading(false);
+	}, []);
 
 	const value: AuthContextType = { user, onLogin, onLogout, isLoading };
 	return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

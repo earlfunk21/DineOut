@@ -14,9 +14,6 @@ type SearchParams = {
 export default async function MyReservations({ searchParams }: { searchParams: SearchParams}) {
   const user = await getUserCookie();
   const page = Number(searchParams.page) || 1;
-  if(!user){
-    return "..."
-  }
   const paginated: PaginatedReservation = await getReservationsByUser(
     user?.userDetails?.id,
     page - 1

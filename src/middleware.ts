@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getUserCookie, removeUserCookie } from "@/lib/cookies";
 
 export const config = {
-	matcher: "/profile",
+	matcher: ["/profile/(.*)", "/profile"],
 };
 
 export async function middleware(request: NextRequest) {

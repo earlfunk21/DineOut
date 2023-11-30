@@ -27,7 +27,7 @@ export default function ImageContainer({ images }: { images: string[] }) {
 			<ScrollArea className="w-full whitespace-nowrap rounded-md border">
 				<div className="flex gap-x-4 items-center">
 					{images.map((image, i) => (
-						<div className="overflow-hidden">
+						<div className="overflow-hidden" key={i}>
 							<Image
 								src={`http://localhost:8080/api/images/${image}`}
 								alt="Restaurant Image"

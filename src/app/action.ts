@@ -80,6 +80,7 @@ export async function addReviews(id: number, props: AddReviewProps) {
 		throw new Error("Failed to fetch data");
 	}
 	revalidatePath("/restaurant/[]", "page");
+	revalidateTag("reviews-made");
 	return response.json();
 }
 
@@ -115,7 +116,10 @@ export async function getReviewsByUserId(id: number | undefined, page: number) {
 		`http://localhost:8080/api/users/${id}/reviews?page=${page}`,
 		{
 			method: "GET",
-			cache: "no-cache",
+			next: {
+				tags: ["reviews-made"],
+				revalidate: 3600,
+			},
 		}
 	);
 	if (!response.ok) {
@@ -234,5 +238,41 @@ export async function addRestaurant(formData: FormData) {
 		throw new Error("Failed to fetch data");
 	}
 	revalidatePath("/discover");
+	return response.json();
+}
+
+export async function deleteReviewById(reviewId: number) {
+	const response = await fetch(
+		`http://localhost:8080/api/reviews/${reviewId}`,
+		{
+			method: "DELETE",
+		}
+	);
+	if (!response.ok) {
+		throw new Error("Failed to fetch data");
+	}
+	revalidateTag("reviews-made");
+}
+
+export async function updateReview(
+	id: number,
+	comment: string,
+	rating: number
+) {
+	const response = await fetch(`http://localhost:8080/api/reviews/${id}`, {
+		method: "PUT",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify({
+			comment,
+			rating,
+		}),
+	});
+	if (!response.ok) {
+		throw new Error("Failed to fetch data");
+	}
+	revalidatePath("/restaurant/[]", "page");
+	revalidateTag("reviews-made");
 	return response.json();
 }
