@@ -11,7 +11,6 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { CheckedState } from "@radix-ui/react-checkbox";
 import { RiRestaurantLine } from "react-icons/ri";
 import useFilterParams from "@/components/hooks/useFilterParams";
-import { getTags, getCuisines, getTypes } from "@/app/action";
 
 type FilterType = {
 	id: number;

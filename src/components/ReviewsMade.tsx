@@ -28,11 +28,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import { useToast } from "@/components/ui/use-toast";
 import { ToastAction } from "@/components/ui/toast";
-import {
-	Dialog,
-	DialogContent,
-	DialogTitle,
-} from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import UpdateReviewForm from "@/components/form/UpdateReviewForm";
 
 type Props = {
@@ -43,9 +39,10 @@ export default function ReviewsMade({ reviews }: Props) {
 	const { toast } = useToast();
 	const [alertDeleteReview, setAlertDeleteReview] = React.useState(false);
 	const [openUpdateReview, setOpenUpdateReview] = React.useState(false);
+	const [selectedReviewId, setSelectedReviewId] = React.useState(0);
 
-	const deleteReview = async (reviewId: number) => {
-		await deleteReviewById(reviewId);
+	const deleteReview = async () => {
+		await deleteReviewById(selectedReviewId);
 		toast({
 			title: "Successfully Deleted",
 			description: "Your Review has been deleted.",
@@ -60,6 +57,11 @@ export default function ReviewsMade({ reviews }: Props) {
 		});
 		setAlertDeleteReview(false);
 	};
+
+  const selectReview = (reviewId: number, callback: (state: boolean) => void) => {
+    setSelectedReviewId(reviewId);
+    callback(true);
+  }
 
 	return (
 		<div className="flex flex-col gap-y-4">
@@ -98,48 +100,21 @@ export default function ReviewsMade({ reviews }: Props) {
 									<DropdownMenuContent>
 										<DropdownMenuLabel>Actions</DropdownMenuLabel>
 										<DropdownMenuGroup>
-											<DropdownMenuItem onClick={() => setOpenUpdateReview(true)} className="text-blue-500">
+											<DropdownMenuItem
+												onClick={() => selectReview(review.id, setOpenUpdateReview)}
+												className="text-blue-500">
 												<RxUpdate className="mr-2 h-4 w-4" />
 												Update
 											</DropdownMenuItem>
-											<DropdownMenuItem onClick={() => setAlertDeleteReview(true)} className="text-red-500">
+											<DropdownMenuItem
+												onClick={() => selectReview(review.id, setAlertDeleteReview)}
+												className="text-red-500">
 												<Trash className="mr-2 h-4 w-4" />
 												Delete
 											</DropdownMenuItem>
 										</DropdownMenuGroup>
 									</DropdownMenuContent>
 								</DropdownMenu>
-
-								<Dialog open={openUpdateReview} onOpenChange={setOpenUpdateReview}>
-									<DialogContent>
-										<DialogTitle>Update Review</DialogTitle>
-										<UpdateReviewForm id={review.id} closeDialog={() => setOpenUpdateReview(false)}/>
-									</DialogContent>
-								</Dialog>
-
-								<AlertDialog
-									open={alertDeleteReview}
-									onOpenChange={setAlertDeleteReview}>
-									<AlertDialogContent className="bg-cornsilk-500">
-										<AlertDialogHeader>
-											<AlertDialogTitle>Are you sure?</AlertDialogTitle>
-										</AlertDialogHeader>
-										<AlertDialogDescription>
-											This action cannot be undone. Are you sure you want to
-											delete?
-										</AlertDialogDescription>
-										<AlertDialogFooter>
-											<AlertDialogCancel className="text-gray-500">
-												Cancel
-											</AlertDialogCancel>
-											<AlertDialogAction
-												className="bg-red-500"
-												onClick={() => deleteReview(review.id)}>
-												Delete
-											</AlertDialogAction>
-										</AlertDialogFooter>
-									</AlertDialogContent>
-								</AlertDialog>
 
 								<div className="flex justify-evenly pt-3 gap-x-2">
 									{Array.from({ length: 5 }).map((_, i) => (
@@ -158,6 +133,41 @@ export default function ReviewsMade({ reviews }: Props) {
 					</div>
 				</div>
 			))}
+
+			<AlertDialog
+				open={alertDeleteReview}
+				onOpenChange={setAlertDeleteReview}>
+				<AlertDialogContent className="bg-cornsilk-500">
+					<AlertDialogHeader>
+						<AlertDialogTitle>Are you sure?</AlertDialogTitle>
+					</AlertDialogHeader>
+					<AlertDialogDescription>
+						This action cannot be undone. Are you sure you want to delete?
+					</AlertDialogDescription>
+					<AlertDialogFooter>
+						<AlertDialogCancel className="text-gray-500">
+							Cancel
+						</AlertDialogCancel>
+						<AlertDialogAction
+							className="bg-red-500"
+							onClick={() => deleteReview()}>
+							Delete
+						</AlertDialogAction>
+					</AlertDialogFooter>
+				</AlertDialogContent>
+			</AlertDialog>
+
+			<Dialog
+				open={openUpdateReview}
+				onOpenChange={setOpenUpdateReview}>
+				<DialogContent>
+					<DialogTitle>Update Review</DialogTitle>
+					<UpdateReviewForm
+						id={selectedReviewId}
+						closeDialog={() => setOpenUpdateReview(false)}
+					/>
+				</DialogContent>
+			</Dialog>
 		</div>
 	);
 }

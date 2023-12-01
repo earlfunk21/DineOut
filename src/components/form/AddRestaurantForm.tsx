@@ -181,6 +181,7 @@ export default function AddRestaurantForm({
 				</FormItem>
 
 				<Button
+          disabled={form.formState.isSubmitting}
 					type="submit"
 					variant="primary">
 					Add Restaurant
