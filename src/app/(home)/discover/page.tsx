@@ -1,4 +1,4 @@
-import { getRestaurants } from "@/app/action";
+import { getCuisines, getRestaurants, getTags, getTypes } from "@/app/action";
 import AddRestaurantButton from "@/components/AddRestaurantButton";
 import FilterNav from "@/components/FilterNav";
 import Footer from "@/components/Footer";
@@ -16,11 +16,15 @@ export type SearchParams = {
 export default async function Discover({ searchParams }: SearchParams) {
 	const response: ApiResponse = await getRestaurants(searchParams || {});
 	const restaurants = response.content;
+  const types = await getTypes();
+  const cuisines = await getCuisines();
+  const tags = await getTags();
+
 	return (
 		<div className="h-screen pt-[140px] .scroll">
 			<div className="container flex justify-center">
 				<aside className="h-full top-[140px] w-[250px] max-w-[250px]">
-					<FilterNav />
+					<FilterNav types={types} cuisines={cuisines} tags={tags} />
 				</aside>
 				<div className="py-14 h-3/4 w-full">
           <div className="flex justify-between">

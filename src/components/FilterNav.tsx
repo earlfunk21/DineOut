@@ -13,7 +13,18 @@ import { RiRestaurantLine } from "react-icons/ri";
 import useFilterParams from "@/components/hooks/useFilterParams";
 import { getTags, getCuisines, getTypes } from "@/app/action";
 
-export default function FilterNav() {
+type FilterType = {
+	id: number;
+	name: string;
+};
+
+type Props = {
+	types: FilterType[];
+	cuisines: FilterType[];
+	tags: FilterType[];
+};
+
+export default function FilterNav({ types, cuisines, tags }: Props) {
 	return (
 		<ScrollArea className="h-full w-full bg-cornsilk-500">
 			<div className="p-4 py-14 flex flex-col mb-40">
@@ -27,17 +38,17 @@ export default function FilterNav() {
 					<MdOutlineTableRestaurant className="text-xl" />
 					<h3 className="font-semibold">Type</h3>
 				</div>
-				<Types />
+				<Types items={types}/>
 				<div className="flex gap-2 mb-5 mt-10 items-center">
 					<GrRestaurant className="text-xl" />
 					<h3 className="font-semibold">Tags</h3>
 				</div>
-				<Tags />
+				<Tags items={tags}/>
 				<div className="flex space-x-2 items-center my-5">
 					<RiRestaurantLine className="text-xl" />
 					<h3 className="font-semibold">Cuisine</h3>
 				</div>
-				<Cuisines />
+				<Cuisines items={cuisines}/>
 			</div>
 		</ScrollArea>
 	);
@@ -47,7 +58,7 @@ function FilterGroup({
 	items,
 	paramName,
 }: {
-	items: { id: number; name: string }[];
+	items: FilterType[];
 	paramName: string;
 }) {
 	const { defaultValue, handleFilterChange } = useFilterParams(paramName);
@@ -76,17 +87,11 @@ function FilterGroup({
 	);
 }
 
-type FilterType = {
-	id: number;
-	name: string;
-};
-
-function Tags() {
+function Tags({ items }: { items: FilterType[] }) {
 	const searchParams = useSearchParams();
 	const [checkedValues, setCheckedValues] = React.useState<string[]>([]);
 	const { replace } = useRouter();
 	const pathname = usePathname();
-	const [items, setItems] = React.useState<FilterType[]>([]);
 
 	React.useEffect(() => {
 		const params = new URLSearchParams(searchParams);
@@ -103,11 +108,7 @@ function Tags() {
 			const tags = tagsParam.split(",");
 			setCheckedValues(tags);
 		}
-		const fetchItems = async () => {
-			await getTags().then(data => setItems(data));
-		};
-		fetchItems();
-	}, []);
+	}, [searchParams]);
 
 	const handleCheckboxChange = (isChecked: CheckedState, value: string) => {
 		if (isChecked) {
@@ -160,43 +161,23 @@ function Ratings() {
 	);
 }
 
-function Types() {
-	const [items, setItems] = React.useState<FilterType[]>([
-		{ id: 0, name: "All" },
-	]);
-
-	React.useEffect(() => {
-		const fetchItems = async () => {
-			await getTypes().then(data => setItems(prev => [...prev, ...data]));
-		};
-
-		fetchItems();
-	}, []);
+function Types({ items }: { items: FilterType[] }) {
+  const updatedItems = [{ id: 0, name: "All" }, ...items];
 
 	return (
 		<FilterGroup
-			items={items}
+			items={updatedItems}
 			paramName="type"
 		/>
 	);
 }
 
-function Cuisines() {
-	const [items, setItems] = React.useState<FilterType[]>([
-		{ id: 0, name: "All" },
-	]);
-
-	React.useEffect(() => {
-		const fetchItems = async () => {
-			await getCuisines().then(data => setItems(prev => [...prev, ...data]));
-		};
-
-		fetchItems();
-	}, []);
+function Cuisines({ items }: { items: FilterType[] }) {
+  const updatedItems = [{ id: 0, name: "All" }, ...items];
 
 	return (
 		<FilterGroup
-			items={items}
+			items={updatedItems}
 			paramName="cuisine"
 		/>
 	);

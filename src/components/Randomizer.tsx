@@ -95,7 +95,7 @@ export function Picked({ setClose }: { setClose: () => void }) {
 			</DialogTrigger>
 			<DialogContent className="w-1/2 h-1/2 flex flex-col justify-center items-center px-24 bg-cornsilk-500">
 				<h1 className="text-2xl font-bold text-center">
-					Still Can't decide where to eat?
+					Still can't decide where to eat?
 				</h1>
 				{restaurant && (
 					<RestaurantCard

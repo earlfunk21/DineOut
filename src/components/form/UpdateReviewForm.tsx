@@ -1,6 +1,5 @@
 "use client";
 import { updateReview } from "@/app/action";
-import useAuth from "@/components/hooks/useAuth";
 import { Button } from "@/components/ui/button";
 import { ToastAction } from "@/components/ui/toast";
 import { useToast } from "@/components/ui/use-toast";
@@ -29,7 +28,6 @@ export default function UpdateReviewForm({
 	};
 
 	const handleSubmitForm = async () => {
-		console.log("Ratings", rating);
 		if (textAreaRef.current?.value === "" || !textAreaRef.current) {
 			toast({
 				title: "Comment is required",

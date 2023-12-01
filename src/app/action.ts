@@ -13,12 +13,13 @@ export async function getRestaurants(query: RestaurantQuery) {
 		page: String(page - 1) || "",
 	});
 
-	const url = `http://localhost:8080/api/restaurants?${params.toString()}`;
-
-	const response = await fetch(url, {
-		method: "GET",
-		cache: "no-cache",
-	});
+	const response = await fetch(
+		`http://localhost:8080/api/restaurants?${params.toString()}`,
+		{
+			method: "GET",
+      cache: "no-cache",
+		}
+	);
 
 	if (!response.ok) {
 		throw new Error("Failed to fetch data");
@@ -30,7 +31,6 @@ export async function getRestaurants(query: RestaurantQuery) {
 export async function getRestaurant(id: number): Promise<Restaurant> {
 	const response = await fetch(`http://localhost:8080/api/restaurants/${id}`, {
 		method: "GET",
-		cache: "no-cache",
 	});
 	return response.json();
 }
@@ -80,7 +80,6 @@ export async function addReviews(id: number, props: AddReviewProps) {
 		throw new Error("Failed to fetch data");
 	}
 	revalidatePath("/restaurant/[]", "page");
-	revalidateTag("reviews-made");
 	return response.json();
 }
 
@@ -107,7 +106,6 @@ export async function addReservations(props: ReservationProps) {
 	if (!response.ok) {
 		throw new Error("Failed to fetch data");
 	}
-	revalidateTag("cancel-reservation");
 	return response.json();
 }
 
@@ -116,10 +114,6 @@ export async function getReviewsByUserId(id: number | undefined, page: number) {
 		`http://localhost:8080/api/users/${id}/reviews?page=${page}`,
 		{
 			method: "GET",
-			next: {
-				tags: ["reviews-made"],
-				revalidate: 3600,
-			},
 		}
 	);
 	if (!response.ok) {
@@ -131,7 +125,6 @@ export async function getReviewsByUserId(id: number | undefined, page: number) {
 export async function getRandomRestaurant() {
 	const response = await fetch("http://localhost:8080/api/restaurants/random", {
 		method: "GET",
-		cache: "no-cache",
 	});
 	if (!response.ok) {
 		throw new Error("Failed to fetch data");
@@ -147,10 +140,6 @@ export async function getReservationsByUser(
 		`http://localhost:8080/api/users/${userId}/reservations?page=${page}`,
 		{
 			method: "GET",
-			next: {
-				tags: ["cancel-reservation"],
-				revalidate: 3600,
-			},
 		}
 	);
 	if (!response.ok) {
@@ -275,4 +264,9 @@ export async function updateReview(
 	revalidatePath("/restaurant/[]", "page");
 	revalidateTag("reviews-made");
 	return response.json();
+}
+
+
+export async function refreshFilter(){
+  revalidatePath("/");
 }
