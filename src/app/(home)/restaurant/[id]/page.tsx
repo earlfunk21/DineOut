@@ -1,6 +1,11 @@
-import { getRestaurant } from "@/app/action";
+import {
+	getRecommendedRestaurants,
+	getRestaurant,
+	getRestaurants,
+} from "@/app/action";
 import ImageContainer from "@/components/ImageContainer";
 import ReserveDialog from "@/components/ReserveDialog";
+import RestaurantCard from "@/components/RestaurantCard";
 import ReviewsDialog from "@/components/ReviewsDialog";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -14,12 +19,15 @@ export default async function Restaurant({
 	params: { id: number };
 }) {
 	const restaurant = await getRestaurant(id);
+	const recommends: Restaurant[] = await getRecommendedRestaurants(
+		restaurant.id
+	);
 
 	return (
 		<div className="h-screen pt-[140px] flex justify-center items-center bg-orange-500">
 			<div className="container h-full py-10 grid grid-cols-12 gap-x-12">
 				<div className="col-span-5">
-					<ImageContainer images={restaurant.images}/>
+					<ImageContainer images={restaurant.images} />
 				</div>
 				<div className="col-span-4 flex flex-col justify-between">
 					<div>
@@ -34,7 +42,9 @@ export default async function Restaurant({
 										key={i}
 										className={cn(
 											"w-5 h-5 text-red-500",
-											i >= (restaurant.ratings !== 0 ? restaurant.ratings : 5) && "text-gray-400"
+											i >=
+												(restaurant.ratings !== 0 ? restaurant.ratings : 5) &&
+												"text-gray-400"
 										)}
 									/>
 								))}
@@ -60,12 +70,27 @@ export default async function Restaurant({
 						</p>
 					</div>
 					<div className="flex gap-x-12">
-						<ReserveDialog restaurant={restaurant}/>
+						<ReserveDialog restaurant={restaurant} />
 						<ReviewsDialog id={id} />
 					</div>
 				</div>
-				<div className="col-span-3 bg-indigo-500">
-					<h1 className="text-4xl font-bold text-white"> ON GOING </h1>
+				<div className="col-span-3 flex flex-col justify-between bg-orange-300 rounded-lg">
+					<h1 className="font-medium text-2xl text-center">
+						Recommended Restaurants
+					</h1>
+					{recommends.map(restaurant => (
+						<Link
+							href={`/restaurant/${restaurant.id}`}
+							key={restaurant.id}>
+							<RestaurantCard
+								className="items-center"
+								image={restaurant.images[0]}
+								name={restaurant.name}
+								location={restaurant.address}
+								ratings={restaurant.ratings}
+							/>
+						</Link>
+					))}
 				</div>
 			</div>
 		</div>

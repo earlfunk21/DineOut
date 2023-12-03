@@ -14,7 +14,7 @@ export default function ImageContainer({ images }: { images: string[] }) {
 					alt="Restaurant Image"
 					width={500}
 					height={500}
-					className="object-fill scale-125 max-w-sm max-h-[500px] blur-sm absolute transition-all ease-in-out duration-300"
+					className="object-fill scale-150 max-w-sm max-h-[500px] blur-sm absolute transition-all ease-in-out duration-300"
 				/>
 				<Image
 					src={`http://localhost:8080/api/images/${images[current]}`}

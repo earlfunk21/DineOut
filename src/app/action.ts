@@ -17,7 +17,7 @@ export async function getRestaurants(query: RestaurantQuery) {
 		`http://localhost:8080/api/restaurants?${params.toString()}`,
 		{
 			method: "GET",
-      cache: "no-cache",
+			cache: "no-cache",
 		}
 	);
 
@@ -266,7 +266,16 @@ export async function updateReview(
 	return response.json();
 }
 
-
-export async function refreshFilter(){
-  revalidatePath("/");
+export async function getRecommendedRestaurants(restaurantId: number) {
+	const response = await fetch(
+		`http://localhost:8080/api/restaurants/recommended`,
+		{
+			method: "GET",
+			cache: "no-cache",
+		}
+	);
+	if (!response.ok) {
+		throw new Error("Failed to fetch data");
+	}
+	return await response.json();
 }
