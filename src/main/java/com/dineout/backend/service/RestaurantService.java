@@ -8,10 +8,7 @@ import com.dineout.backend.entity.Review;
 import com.dineout.backend.entity.Type;
 import com.dineout.backend.repository.RestaurantRepository;
 import jakarta.persistence.EntityNotFoundException;
-import jakarta.persistence.criteria.Join;
-import jakarta.persistence.criteria.Predicate;
-import jakarta.persistence.criteria.Root;
-import jakarta.persistence.criteria.Subquery;
+import jakarta.persistence.criteria.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -38,7 +35,7 @@ public class RestaurantService {
     }
 
     public Page<RestaurantResponse> getRestaurants(List<String> tagNames, String cuisineName, String typeName,
-                                                   Double rating, String searchQuery,
+                                                   Long rating, String searchQuery,
                                                    Pageable pageable) {
         Specification<Restaurant> spec = withFilters(tagNames, cuisineName, typeName, rating, searchQuery);
         Page<Restaurant> restaurantPage = restaurantRepository.findAll(spec, pageable);
@@ -55,7 +52,7 @@ public class RestaurantService {
     }
 
     public Specification<Restaurant> withFilters(List<String> tagNames, String cuisineName, String typeName,
-                                                 Double minAvgRating, String searchQuery) {
+                                                 Long queryRatings, String searchQuery) {
         return (root, query, criteriaBuilder) -> {
             List<Predicate> predicates = new ArrayList<>();
 
@@ -73,14 +70,19 @@ public class RestaurantService {
                 predicates.add(criteriaBuilder.equal(typeJoin.get("name"), typeName));
             }
 
-            if (minAvgRating != null) {
+            if (queryRatings != null) {
                 Subquery<Double> subquery = query.subquery(Double.class);
                 Root<Review> subRoot = subquery.from(Review.class);
-                subquery.select(criteriaBuilder.avg(subRoot.get("rating")))
+                subquery.select(criteriaBuilder.coalesce(criteriaBuilder.avg(subRoot.get("rating")), 5.0))
                         .where(criteriaBuilder.equal(subRoot.get("restaurant"), root));
 
-                predicates.add(criteriaBuilder.greaterThanOrEqualTo(subquery, minAvgRating));
+                Expression<Double> avgRating = subquery.getSelection();
+                Expression<Long> roundedAvgRating = criteriaBuilder.function("ROUND", Long.class, avgRating);
+
+                Predicate ratingPredicate = criteriaBuilder.equal(roundedAvgRating, queryRatings);
+                predicates.add(ratingPredicate);
             }
+
 
             // Search by name or location
             if (searchQuery != null && !searchQuery.isEmpty()) {
@@ -94,11 +96,19 @@ public class RestaurantService {
         };
     }
 
-    public RestaurantResponse getRandomEntity() {
+    public Restaurant getRandomRestaurant() {
         long count = restaurantRepository.count();
         Random random = new Random();
         int randomIndex = random.nextInt((int) count);
         List<Restaurant> restaurants = restaurantRepository.findAll(PageRequest.of(randomIndex, 1)).getContent();
-        return restaurants.isEmpty() ? null : new RestaurantResponse(restaurants.get(0));
+        return restaurants.isEmpty() ? null : restaurants.get(0);
+    }
+
+    public List<Restaurant> getRecommendedRestaurants() {
+        List<Restaurant> restaurants = new ArrayList<>();
+        for (int i = 1; i <= 2; i++) {
+            restaurants.add(getRandomRestaurant());
+        }
+        return restaurants;
     }
 }

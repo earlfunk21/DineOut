@@ -8,7 +8,7 @@ import com.dineout.backend.entity.User;
 import com.dineout.backend.service.ReservationService;
 import com.dineout.backend.service.RestaurantService;
 import com.dineout.backend.service.UserService;
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 
 @RestController
-@RequiredArgsConstructor
+@AllArgsConstructor
 @RequestMapping("/api/reservations")
 public class ReservationController {
     private final ReservationService reservationService;

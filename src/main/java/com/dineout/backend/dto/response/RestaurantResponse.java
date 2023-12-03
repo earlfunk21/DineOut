@@ -18,7 +18,7 @@ public class RestaurantResponse {
     private Type type;
     private Cuisine cuisine;
     private List<String> images;
-    private Double ratings;
+    private Long ratings;
 
     public RestaurantResponse(Restaurant restaurant){
         id = restaurant.getId();
@@ -30,6 +30,6 @@ public class RestaurantResponse {
         type = restaurant.getType();
         cuisine = restaurant.getCuisine();
         images = restaurant.getImages();
-        ratings = restaurant.getAverageRating();
+        ratings = restaurant.getAverageRating() == 0 ? 5 : restaurant.getAverageRating() ;
     }
 }

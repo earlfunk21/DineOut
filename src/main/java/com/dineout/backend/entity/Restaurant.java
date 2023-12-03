@@ -48,9 +48,9 @@ public class Restaurant {
     private List<Reservation> reservations = new ArrayList<>();
 
     @JsonIgnore
-    public double getAverageRating() {
+    public Long getAverageRating() {
         if (reviews.isEmpty()) {
-            return 0.0;
+            return 5L;
         }
 
         double sumRatings = 0.0;
@@ -58,6 +58,6 @@ public class Restaurant {
             sumRatings += review.getRating();
         }
 
-        return sumRatings / reviews.size();
+        return Math.round(sumRatings / reviews.size());
     }
 }

@@ -70,7 +70,7 @@ public class RestaurantController {
             @RequestParam(value = "tags", required = false, defaultValue = "") List<String> tags,
             @RequestParam(value = "cuisine", required = false, defaultValue = "") String cuisine,
             @RequestParam(value = "type", required = false, defaultValue = "") String type,
-            @RequestParam(value = "ratings", required = false, defaultValue = "") Double ratings,
+            @RequestParam(value = "ratings", required = false, defaultValue = "") Long ratings,
             @RequestParam(value = "search", required = false, defaultValue = "") String search,
             @PageableDefault Pageable pageable) {
         try {
@@ -177,8 +177,20 @@ public class RestaurantController {
     @GetMapping("/random")
     public ResponseEntity<?> getRandomRestaurant() {
         try {
-            RestaurantResponse restaurant = restaurantService.getRandomEntity();
-            return new ResponseEntity<>(restaurant, HttpStatus.OK);
+            Restaurant restaurant = restaurantService.getRandomRestaurant();
+            RestaurantResponse response = new RestaurantResponse(restaurant);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(Map.of("message", e.getMessage()), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping("/recommended")
+    public ResponseEntity<?> getRecommendedRestaurants() {
+        try {
+            List<Restaurant> restaurants = restaurantService.getRecommendedRestaurants();
+            List<RestaurantResponse> response = restaurants.stream().map(RestaurantResponse::new).toList();
+            return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(Map.of("message", e.getMessage()), HttpStatus.BAD_REQUEST);
         }
