@@ -28,10 +28,10 @@ public class InitialData implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-//        initTags();
-//        initCuisines();
-//        initTypes();
-//        initUsers();
+        initTags();
+        initCuisines();
+        initTypes();
+        initUsers();
     }
 
     public void initTags() {
