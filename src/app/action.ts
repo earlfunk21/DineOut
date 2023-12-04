@@ -125,6 +125,7 @@ export async function getReviewsByUserId(id: number | undefined, page: number) {
 export async function getRandomRestaurant() {
 	const response = await fetch("http://localhost:8080/api/restaurants/random", {
 		method: "GET",
+    cache: "no-cache"
 	});
 	if (!response.ok) {
 		throw new Error("Failed to fetch data");
@@ -266,7 +267,7 @@ export async function updateReview(
 	return response.json();
 }
 
-export async function getRecommendedRestaurants(restaurantId: number) {
+export async function getRecommendedRestaurants() {
 	const response = await fetch(
 		`http://localhost:8080/api/restaurants/recommended`,
 		{
@@ -278,4 +279,17 @@ export async function getRecommendedRestaurants(restaurantId: number) {
 		throw new Error("Failed to fetch data");
 	}
 	return await response.json();
+}
+
+
+export async function deleteRestaurant(restaurantId: number) {
+	const response = await fetch(
+		`http://localhost:8080/api/restaurants/${restaurantId}`,
+		{
+			method: "DELETE",
+		}
+	);
+	if (!response.ok) {
+		throw new Error("Failed to fetch data");
+	}
 }

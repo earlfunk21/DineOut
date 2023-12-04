@@ -19,9 +19,7 @@ export default async function Restaurant({
 	params: { id: number };
 }) {
 	const restaurant = await getRestaurant(id);
-	const recommends: Restaurant[] = await getRecommendedRestaurants(
-		restaurant.id
-	);
+	const recommends: Restaurant[] = await getRecommendedRestaurants();
 
 	return (
 		<div className="h-screen pt-[140px] flex justify-center items-center bg-orange-500">
