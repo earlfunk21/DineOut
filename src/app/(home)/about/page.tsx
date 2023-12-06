@@ -13,7 +13,7 @@ export default function AboutUsPage() {
 				<h1 className="text-center text-6xl font-bold">About Us</h1>
 				<p className="text-center font-medium pb-10">
 					We are a group of vibrant, student developers, driven by our love for
-					food and <br /> innovation, and we're the creative minds behind
+					food and <br /> innovation, and we&apos;re the creative minds behind
 					DineOut—a revolutionary platform <br /> designed to simplify and
 					elevate the dining experience.
 				</p>

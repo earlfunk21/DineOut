@@ -76,10 +76,10 @@ export default async function Restaurant({
 					<h1 className="font-medium text-2xl text-center">
 						Recommended Restaurants
 					</h1>
-					{recommends.map(restaurant => (
+					{recommends.map((restaurant, i) => (
 						<Link
 							href={`/restaurant/${restaurant.id}`}
-							key={restaurant.id}>
+							key={`recommend-${i}-${restaurant.id}`}>
 							<RestaurantCard
 								className="items-center"
 								image={restaurant.images[0]}

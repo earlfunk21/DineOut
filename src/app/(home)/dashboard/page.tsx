@@ -25,24 +25,7 @@ export default async function DashboardPage({ searchParams }: SearchParams) {
 						Export to PDF
 					</Button>
 				</div>
-				<table className="my-4 bg-cornsilk-500 rounded-lg">
-					<thead className="border-b-4 border-orange-500">
-						<tr>
-							<th className="border-r-4 border-orange-500 p-2 ">ID</th>
-							<th className="border-r-4 border-orange-500 p-2">NAME</th>
-							<th className="border-r-4 border-orange-500 p-2">HOURS</th>
-							<th className="border-r-4 border-orange-500 p-2">Tags</th>
-							<th className="border-r-4 border-orange-500 p-2">Location</th>
-							<th className="border-r-4 border-orange-500 p-2">Rating</th>
-							<th className="p-2">Action</th>
-						</tr>
-					</thead>
-					<tbody>
-						{restaurants.map(restaurant => (
-							<RestaurantsTable restaurant={restaurant}/>
-						))}
-					</tbody>
-				</table>
+				<RestaurantsTable restaurants={restaurants} />
 			</div>
 			<div className="bg-orange-500">
 				<Pagination

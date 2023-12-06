@@ -17,7 +17,10 @@ export async function getRestaurants(query: RestaurantQuery) {
 		`http://localhost:8080/api/restaurants?${params.toString()}`,
 		{
 			method: "GET",
-			cache: "no-cache",
+			next: {
+				tags: ["restaurants"],
+				revalidate: 3600,
+			},
 		}
 	);
 
@@ -31,6 +34,7 @@ export async function getRestaurants(query: RestaurantQuery) {
 export async function getRestaurant(id: number): Promise<Restaurant> {
 	const response = await fetch(`http://localhost:8080/api/restaurants/${id}`, {
 		method: "GET",
+    cache: "no-cache"
 	});
 	return response.json();
 }
@@ -49,6 +53,10 @@ export async function getReviewsByRestaurantId(id: number) {
 		`http://localhost:8080/api/restaurants/${id}/reviews`,
 		{
 			method: "GET",
+      next: {
+        tags: ["reviews"],
+        revalidate: 3600
+      }
 		}
 	);
 	if (!response.ok) {
@@ -79,7 +87,8 @@ export async function addReviews(id: number, props: AddReviewProps) {
 	if (!response.ok) {
 		throw new Error("Failed to fetch data");
 	}
-	revalidatePath("/restaurant/[]", "page");
+	revalidateTag("reviews")
+	revalidateTag("reviews-made")
 	return response.json();
 }
 
@@ -106,6 +115,7 @@ export async function addReservations(props: ReservationProps) {
 	if (!response.ok) {
 		throw new Error("Failed to fetch data");
 	}
+  revalidateTag("cancel-reservation")
 	return response.json();
 }
 
@@ -114,6 +124,10 @@ export async function getReviewsByUserId(id: number | undefined, page: number) {
 		`http://localhost:8080/api/users/${id}/reviews?page=${page}`,
 		{
 			method: "GET",
+      next: {
+        tags: ["reviews-made"],
+        revalidate: 3600
+      }
 		}
 	);
 	if (!response.ok) {
@@ -125,7 +139,7 @@ export async function getReviewsByUserId(id: number | undefined, page: number) {
 export async function getRandomRestaurant() {
 	const response = await fetch("http://localhost:8080/api/restaurants/random", {
 		method: "GET",
-    cache: "no-cache"
+		cache: "no-cache",
 	});
 	if (!response.ok) {
 		throw new Error("Failed to fetch data");
@@ -141,6 +155,10 @@ export async function getReservationsByUser(
 		`http://localhost:8080/api/users/${userId}/reservations?page=${page}`,
 		{
 			method: "GET",
+      next: {
+        tags: ["cancel-reservation"],
+        revalidate: 3600
+      }
 		}
 	);
 	if (!response.ok) {
@@ -227,7 +245,7 @@ export async function addRestaurant(formData: FormData) {
 	if (!response.ok) {
 		throw new Error("Failed to fetch data");
 	}
-	revalidatePath("/discover");
+	revalidateTag("restaurants");
 	return response.json();
 }
 
@@ -241,7 +259,8 @@ export async function deleteReviewById(reviewId: number) {
 	if (!response.ok) {
 		throw new Error("Failed to fetch data");
 	}
-	revalidateTag("reviews-made");
+	revalidateTag("reviews");
+  revalidateTag("reviews-made")
 }
 
 export async function updateReview(
@@ -262,7 +281,7 @@ export async function updateReview(
 	if (!response.ok) {
 		throw new Error("Failed to fetch data");
 	}
-	revalidatePath("/restaurant/[]", "page");
+	revalidateTag("reviews");
 	revalidateTag("reviews-made");
 	return response.json();
 }
@@ -281,7 +300,6 @@ export async function getRecommendedRestaurants() {
 	return await response.json();
 }
 
-
 export async function deleteRestaurant(restaurantId: number) {
 	const response = await fetch(
 		`http://localhost:8080/api/restaurants/${restaurantId}`,
@@ -292,4 +310,23 @@ export async function deleteRestaurant(restaurantId: number) {
 	if (!response.ok) {
 		throw new Error("Failed to fetch data");
 	}
+	revalidateTag("restaurants");
+}
+
+export async function updateRestaurant(
+	restaurantId: number,
+	formData: FormData
+) {
+	const response = await fetch(
+		`http://localhost:8080/api/restaurants/${restaurantId}`,
+		{
+			method: "PUT",
+			body: formData,
+		}
+	);
+	if (!response.ok) {
+		throw new Error("Failed to fetch data");
+	}
+	revalidateTag("restaurants");
+  revalidatePath("/restaurant/[]", "page");
 }
