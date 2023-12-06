@@ -1,11 +1,9 @@
 package com.dineout.backend.service;
 
 
+import com.dineout.backend.dto.request.RestaurantRequest;
 import com.dineout.backend.dto.response.RestaurantResponse;
-import com.dineout.backend.entity.Cuisine;
-import com.dineout.backend.entity.Restaurant;
-import com.dineout.backend.entity.Review;
-import com.dineout.backend.entity.Type;
+import com.dineout.backend.entity.*;
 import com.dineout.backend.repository.RestaurantRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.persistence.criteria.*;
@@ -15,6 +13,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -110,5 +109,19 @@ public class RestaurantService {
             restaurants.add(getRandomRestaurant());
         }
         return restaurants;
+    }
+
+    public Restaurant updateRestaurant(Restaurant updatedRestaurant, RestaurantRequest restaurantRequest) {
+
+        if (!restaurantRequest.getName().isBlank()) {
+            updatedRestaurant.setName(restaurantRequest.getName());
+        }
+        if (!restaurantRequest.getDescription().isBlank()) {
+            updatedRestaurant.setDescription(restaurantRequest.getDescription());
+        }
+        if (!restaurantRequest.getServiceHours().isBlank()) {
+            updatedRestaurant.setServiceHours(restaurantRequest.getServiceHours());
+        }
+        return saveRestaurant(updatedRestaurant);
     }
 }

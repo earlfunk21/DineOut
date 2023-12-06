@@ -14,7 +14,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -38,7 +37,8 @@ public class RestaurantController {
     private final UserService userService;
 
     @PostMapping
-    public ResponseEntity<?> addRestaurant(@RequestParam(name = "images", required = false) List<MultipartFile> images, @RequestParam("restaurant") String restaurantJson) {
+    public ResponseEntity<?> addRestaurant(@RequestParam(name = "images", required = false) List<MultipartFile> images,
+                                           @RequestParam("restaurant") String restaurantJson) {
         try {
             ObjectMapper objectMapper = new ObjectMapper();
             RestaurantRequest restaurantRequest = objectMapper.readValue(restaurantJson, RestaurantRequest.class);
@@ -83,21 +83,40 @@ public class RestaurantController {
     }
 
     @PutMapping("/{restaurantId}")
-    public ResponseEntity<?> updateRestaurant(@RequestBody RestaurantRequest restaurantRequest,
+    public ResponseEntity<?> updateRestaurant(@RequestParam(name = "restaurant") String restaurantJson,
+                                              @RequestParam(name = "images", required = false) List<MultipartFile> images,
                                               @PathVariable Long restaurantId) {
         try {
-            Restaurant restaurant = restaurantService.getRestaurantById(restaurantId);
-            restaurant.setName(restaurantRequest.getName());
-            restaurant.setDescription(restaurantRequest.getDescription());
-            restaurant.setServiceHours(restaurantRequest.getServiceHours());
+            ObjectMapper objectMapper = new ObjectMapper();
+            RestaurantRequest restaurantRequest = objectMapper.readValue(restaurantJson, RestaurantRequest.class);
             List<Tag> tags = new ArrayList<>();
             for (Long tagId : restaurantRequest.getTags()) {
                 Tag tag = tagService.getTagById(tagId);
                 tags.add(tag);
             }
-            restaurant.setTags(tags);
-            Restaurant updatedRestaurant = restaurantService.saveRestaurant(restaurant);
-            return new ResponseEntity<>(updatedRestaurant, HttpStatus.OK);
+            Restaurant updatedRestaurant = restaurantService.getRestaurantById(restaurantId);
+            updatedRestaurant.setTags(tags);
+            if (!images.isEmpty()) {
+                updatedRestaurant.getImages().forEach(image -> {
+                    try {
+                        imageService.deleteFile(image);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                });
+                updatedRestaurant.getImages().clear();
+                images.forEach(image -> {
+                    try {
+                        imageService.uploadImage(image);
+                        updatedRestaurant.getImages().add(image.getOriginalFilename());
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                });
+            }
+            Restaurant restaurant = restaurantService.updateRestaurant(updatedRestaurant, restaurantRequest);
+            RestaurantResponse response = new RestaurantResponse(restaurant);
+            return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(Map.of("message", e.getMessage()), HttpStatus.BAD_REQUEST);
         }

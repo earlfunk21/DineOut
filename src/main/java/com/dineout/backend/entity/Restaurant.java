@@ -26,8 +26,7 @@ public class Restaurant {
     private String description;
     private String serviceHours;
     private String location;
-    @ManyToMany(
-            cascade = CascadeType.ALL)
+    @ManyToMany
     @JoinTable(name = "restaurant_tag", joinColumns = {
             @JoinColumn(name = "restaurant_id", referencedColumnName = "id")
     }, inverseJoinColumns = {
