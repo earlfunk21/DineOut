@@ -96,7 +96,7 @@ public class RestaurantController {
             }
             Restaurant updatedRestaurant = restaurantService.getRestaurantById(restaurantId);
             updatedRestaurant.setTags(tags);
-            if (!images.isEmpty()) {
+            if (images != null) {
                 updatedRestaurant.getImages().forEach(image -> {
                     try {
                         imageService.deleteFile(image);
