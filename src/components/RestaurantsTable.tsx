@@ -64,13 +64,16 @@ export default function RestaurantsTable({
 						<td className="border-r-4 border-orange-500">
 							<div className="h-full w-full flex flex-col items-center gap-y-2 px-2 py-4">
 								{restaurant.tags.map(tag => (
-									<Button
-										variant="primary"
-										size="sm"
-										className="rounded-full px-5"
+									<Link
+										href={`/discover?tags=${tag.name}`}
 										key={tag.id}>
-										{tag.name}
-									</Button>
+										<Button
+											variant="primary"
+											size="sm"
+											className="rounded-full px-5">
+											{tag.name}
+										</Button>
+									</Link>
 								))}
 							</div>
 						</td>
