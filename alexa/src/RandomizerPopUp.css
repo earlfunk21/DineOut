@@ -1,0 +1,111 @@
+.instanceChild {
+    border-radius: var(--br-xl);
+    background-color: var(--color-blanchedalmond-100);
+  }
+  .foodPromos51,
+  .instanceChild,
+  .randomizerPopupInner {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+  .foodPromos51 {
+    height: 16.56%;
+    width: 12.19%;
+    top: 17.98%;
+    right: 42.05%;
+    bottom: 65.46%;
+    left: 45.76%;
+    max-width: 100%;
+    overflow: hidden;
+    max-height: 100%;
+    object-fit: cover;
+  }
+  .register {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    border-radius: var(--br-5xs);
+    background-color: var(--color-orangered-100);
+    box-shadow: 0 2px 5px rgba(255, 88, 84, 0.3);
+  }
+  .clickForA {
+    position: absolute;
+    height: 96.06%;
+    width: 97%;
+    top: 1.97%;
+    left: 1.35%;
+    line-height: 21px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .registerParent {
+    position: absolute;
+    height: 10.41%;
+    width: 48.58%;
+    top: 69.4%;
+    right: 25.73%;
+    bottom: 20.19%;
+    left: 25.69%;
+    cursor: pointer;
+    color: var(--color-white);
+  }
+  .generateARandom {
+    margin: 0;
+  }
+  .generateARandomContainer1 {
+    width: 100%;
+  }
+  .generateARandomContainer,
+  .stillCantDecideContainer {
+    position: absolute;
+    height: 8.2%;
+    width: 80.41%;
+    top: 54.26%;
+    left: 9.8%;
+    font-size: var(--font-size-lg);
+    line-height: 20px;
+    display: flex;
+    align-items: center;
+  }
+  .stillCantDecideContainer {
+    height: 13.72%;
+    top: 37.54%;
+    font-size: var(--font-size-15xl);
+    line-height: 33.2px;
+  }
+  .deleteButtonIcon {
+    position: absolute;
+    height: 4.26%;
+    width: 3.23%;
+    top: 3.47%;
+    right: 3.35%;
+    bottom: 92.27%;
+    left: 93.43%;
+    max-width: 100%;
+    overflow: hidden;
+    max-height: 100%;
+    object-fit: cover;
+  }
+  .randomizerPopup {
+    position: relative;
+    width: 837px;
+    height: 634px;
+    max-width: 100%;
+    max-height: 100%;
+    overflow: auto;
+    text-align: center;
+    font-size: var(--font-size-xl);
+    color: var(--color-black);
+    font-family: var(--font-inter);
+  }
+  
