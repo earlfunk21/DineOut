@@ -1,0 +1,644 @@
+.review1Child {
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: var(--br-3xs);
+    background-color: var(--color-white);
+    width: 509px;
+    height: 106px;
+  }
+  .star2Icon {
+    position: relative;
+    width: 9.9px;
+    height: 9.9px;
+    overflow: hidden;
+    flex-shrink: 0;
+    object-fit: cover;
+  }
+  .rating {
+    position: absolute;
+    top: 12.6px;
+    left: 384.5px;
+    background-color: var(--color-white);
+    width: 98.1px;
+    height: 27.9px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .kristinjones {
+    top: 15.3px;
+    left: 93.4px;
+    font-size: var(--font-size-xs);
+    text-transform: lowercase;
+    width: 368.9px;
+  }
+  .dayAgo,
+  .iWouldRecommend,
+  .kristinjones {
+    position: absolute;
+    line-height: 15px;
+    display: inline-block;
+    height: 22.3px;
+  }
+  .iWouldRecommend {
+    top: 71.1px;
+    left: 20.2px;
+    font-size: var(--font-size-smi);
+    width: 462.3px;
+  }
+  .dayAgo {
+    top: 40.4px;
+    left: 93.4px;
+    text-transform: lowercase;
+    font-family: var(--font-inter);
+    color: var(--color-darkgray-400);
+    width: 368.9px;
+  }
+  .imageIcon,
+  .ovalIcon {
+    height: 100%;
+    width: 100%;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    max-width: 100%;
+    overflow: hidden;
+    max-height: 100%;
+    object-fit: cover;
+  }
+  .imageIcon {
+    position: absolute;
+    border-radius: var(--br-281xl);
+  }
+  .ovalIcon {
+    display: none;
+  }
+  .div,
+  .ovalIcon,
+  .ovalIcon1 {
+    position: absolute;
+  }
+  .ovalIcon1 {
+    height: 100%;
+    width: 100%;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    max-width: 100%;
+    overflow: hidden;
+    max-height: 100%;
+    object-fit: cover;
+  }
+  .div {
+    width: 43.2%;
+    top: 17.76%;
+    left: 28.4%;
+    line-height: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .badgesnumber,
+  .inner {
+    position: absolute;
+    height: 77.95%;
+    width: 77.52%;
+    top: 11.28%;
+    right: 11.47%;
+    bottom: 10.77%;
+    left: 11.01%;
+  }
+  .badgesnumber {
+    height: 39.96%;
+    width: 40%;
+    top: 0;
+    right: 0;
+    bottom: 60.04%;
+    left: 60%;
+    display: none;
+  }
+  .ovalIcon2,
+  .wrapperOval {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    left: 0;
+  }
+  .ovalIcon2 {
+    max-width: 100%;
+    overflow: hidden;
+    max-height: 100%;
+    object-fit: contain;
+    top: 2px;
+    transform: scale(1.41);
+  }
+  .wrapperOval {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .badgesstatus,
+  .div1 {
+    position: absolute;
+    display: none;
+  }
+  .div1 {
+    width: 43.2%;
+    top: 28.29%;
+    left: 28.4%;
+    line-height: 13px;
+    align-items: center;
+    justify-content: center;
+  }
+  .badgesstatus {
+    height: 39.96%;
+    width: 40%;
+    top: 60.04%;
+    right: 0;
+    bottom: 0;
+    left: 60%;
+  }
+  .roundAvatars60X60 {
+    position: absolute;
+    height: 46.04%;
+    width: 10.71%;
+    top: 14.43%;
+    right: 85.32%;
+    bottom: 39.53%;
+    left: 3.97%;
+    text-align: center;
+    color: var(--color-white);
+    font-family: var(--font-sf-pro-text);
+  }
+  .rating1,
+  .review1 {
+    position: absolute;
+    top: -465px;
+    left: 0;
+    width: 509px;
+    height: 106px;
+  }
+  .rating1 {
+    top: 21.6px;
+    left: 384.5px;
+    background-color: var(--color-white);
+    width: 98.1px;
+    height: 27.9px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .cameronwilliam {
+    top: 24.3px;
+    left: 93.4px;
+    font-size: var(--font-size-xs);
+    text-transform: lowercase;
+    width: 368.9px;
+  }
+  .cameronwilliam,
+  .daysAgo,
+  .iLoveIt {
+    position: absolute;
+    line-height: 15px;
+    display: inline-block;
+    height: 22.3px;
+  }
+  .iLoveIt {
+    top: 80.1px;
+    left: 20.2px;
+    font-size: var(--font-size-smi);
+    width: 462.3px;
+  }
+  .daysAgo {
+    top: 49.4px;
+    left: 93.4px;
+    text-transform: lowercase;
+    font-family: var(--font-inter);
+    color: var(--color-darkgray-400);
+    width: 368.9px;
+  }
+  .roundAvatars60X61 {
+    position: absolute;
+    height: 46.04%;
+    width: 10.71%;
+    top: 26.89%;
+    right: 85.32%;
+    bottom: 27.08%;
+    left: 3.97%;
+    text-align: center;
+    color: var(--color-white);
+    font-family: var(--font-sf-pro-text);
+  }
+  .review2,
+  .review5Child {
+    position: absolute;
+    top: -335px;
+    left: 0;
+    width: 509px;
+    height: 106px;
+  }
+  .review5Child {
+    top: 0;
+    border-radius: var(--br-3xs);
+    background-color: var(--color-white);
+    height: 109px;
+  }
+  .rating2 {
+    position: absolute;
+    top: 12.9px;
+    left: 384.5px;
+    width: 98.1px;
+    height: 28.7px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .johnwilson {
+    top: 15.8px;
+    left: 93.4px;
+    font-size: var(--font-size-xs);
+    line-height: 15px;
+    text-transform: lowercase;
+    display: inline-block;
+    width: 368.9px;
+    height: 22.9px;
+  }
+  .dayAgo1,
+  .div4,
+  .johnwilson {
+    position: absolute;
+  }
+  .dayAgo1 {
+    top: 41.6px;
+    left: 93.4px;
+    line-height: 15px;
+    text-transform: lowercase;
+    font-family: var(--font-inter);
+    color: var(--color-darkgray-400);
+    display: inline-block;
+    width: 368.9px;
+    height: 22.9px;
+  }
+  .div4 {
+    width: 42.78%;
+    top: 17.88%;
+    left: 28.87%;
+    line-height: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .badgesnumber2,
+  .inner4 {
+    position: absolute;
+    height: 77.83%;
+    width: 77.6%;
+    top: 11.3%;
+    right: 11.2%;
+    bottom: 10.87%;
+    left: 11.2%;
+  }
+  .badgesnumber2 {
+    height: 45.82%;
+    width: 45.87%;
+    top: 0;
+    right: 0;
+    bottom: 54.18%;
+    left: 54.13%;
+    display: none;
+  }
+  .ovalIcon10 {
+    height: 100%;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+    max-height: 100%;
+    object-fit: contain;
+    position: absolute;
+    left: 0;
+    top: 2px;
+    transform: scale(1.398);
+  }
+  .div5 {
+    position: absolute;
+    width: 43.2%;
+    top: 8.97%;
+    left: 28.4%;
+    line-height: 13px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+  }
+  .badgesstatus2,
+  .inner5 {
+    position: absolute;
+    height: 77.61%;
+    width: 77.52%;
+    top: 10.95%;
+    right: 11.47%;
+    bottom: 11.44%;
+    left: 11.01%;
+  }
+  .badgesstatus2 {
+    height: 40.04%;
+    width: 40%;
+    top: 61.16%;
+    right: 0;
+    bottom: -1.2%;
+    left: 60%;
+    display: none;
+  }
+  .roundAvatars35X35 {
+    position: absolute;
+    height: 46.06%;
+    width: 10.71%;
+    top: 14.5%;
+    right: 85.32%;
+    bottom: 39.45%;
+    left: 3.97%;
+    text-align: center;
+    color: var(--color-white);
+    font-family: var(--font-sf-pro-text);
+  }
+  .rating4,
+  .review3,
+  .review5 {
+    position: absolute;
+    top: 233px;
+    left: 0;
+    width: 509px;
+    height: 109px;
+  }
+  .rating4,
+  .review3 {
+    top: -205px;
+    height: 106px;
+  }
+  .rating4 {
+    top: 12.6px;
+    left: 384.5px;
+    width: 98.1px;
+    height: 27.9px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .roundAvatars60X611 {
+    position: absolute;
+    height: 46.04%;
+    width: 10.71%;
+    top: 18.4%;
+    right: 85.32%;
+    bottom: 35.57%;
+    left: 3.97%;
+    text-align: center;
+    color: var(--color-white);
+    font-family: var(--font-sf-pro-text);
+  }
+  .review4 {
+    position: absolute;
+    top: -75px;
+    left: 0;
+    width: 509px;
+    height: 106px;
+  }
+  .review1Item {
+    top: 0;
+    left: 0;
+    border-radius: var(--br-3xs);
+    background-color: var(--color-white);
+    width: 509px;
+    height: 162px;
+  }
+  .div10,
+  .inner10,
+  .review1Item {
+    position: absolute;
+  }
+  .div10 {
+    width: 42.78%;
+    top: 17.82%;
+    left: 28.87%;
+    line-height: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .inner10 {
+    height: 77.68%;
+    width: 77.6%;
+    top: 11.16%;
+    right: 11.2%;
+    bottom: 11.16%;
+    left: 11.2%;
+  }
+  .badgesnumber5 {
+    height: 45.9%;
+    width: 45.87%;
+    top: 0;
+    right: 0;
+    bottom: 54.1%;
+    left: 54.13%;
+  }
+  .badgesnumber5,
+  .badgesstatus5,
+  .div11 {
+    position: absolute;
+    display: none;
+  }
+  .div11 {
+    width: 43.2%;
+    top: 8.55%;
+    left: 28.4%;
+    line-height: 13px;
+    align-items: center;
+    justify-content: center;
+  }
+  .badgesstatus5 {
+    height: 39.96%;
+    width: 40%;
+    top: 61.07%;
+    right: 0;
+    bottom: -1.02%;
+    left: 60%;
+  }
+  .roundAvatars35X351 {
+    position: absolute;
+    height: 30.12%;
+    width: 10.71%;
+    top: 9.44%;
+    right: 85.32%;
+    bottom: 60.43%;
+    left: 3.97%;
+    text-align: center;
+    color: var(--color-white);
+    font-family: var(--font-sf-pro-text);
+  }
+  .review11,
+  .review1Parent {
+    position: absolute;
+    top: 55px;
+    left: 0;
+    width: 509px;
+    height: 162px;
+  }
+  .review1Parent {
+    top: 739px;
+    left: 62px;
+    height: 109px;
+  }
+  .reviews {
+    position: absolute;
+    top: 221px;
+    left: 272px;
+    font-size: var(--font-size-xl);
+    line-height: 21px;
+    font-family: var(--font-inter);
+    color: var(--color-black);
+    text-align: center;
+  }
+  .ratingsChild {
+    position: absolute;
+    top: 50px;
+    left: 59px;
+    border-radius: var(--br-3xs);
+    background-color: var(--color-white);
+    width: 509px;
+    height: 140px;
+  }
+  .postReview {
+    position: absolute;
+    top: 3px;
+    left: calc(50% - 29px);
+    line-height: 21px;
+  }
+  .reserveButton {
+    position: absolute;
+    top: calc(50% - 372px);
+    left: 450px;
+    border-radius: var(--br-5xs);
+    background-color: var(--color-orangered-100);
+    box-shadow: 0 2px 5px rgba(255, 88, 84, 0.3);
+    width: 96px;
+    height: 27px;
+    cursor: pointer;
+    text-align: center;
+    font-size: var(--font-size-3xs);
+    color: var(--color-white);
+    font-family: var(--font-inter);
+  }
+  .star6Icon6,
+  .star6Icon7,
+  .star6Icon8,
+  .star7Icon,
+  .star8Icon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 11px;
+    height: 10px;
+    overflow: hidden;
+    object-fit: cover;
+  }
+  .star6Icon7,
+  .star6Icon8,
+  .star7Icon,
+  .star8Icon {
+    left: 22px;
+    width: 9.9px;
+    height: 9.9px;
+  }
+  .star6Icon7,
+  .star6Icon8,
+  .star8Icon {
+    height: 90.2%;
+    width: 10.11%;
+    top: 9.8%;
+    right: 44.94%;
+    bottom: 0;
+    left: 44.94%;
+    max-width: 100%;
+    max-height: 100%;
+  }
+  .star6Icon8,
+  .star8Icon {
+    right: 22.47%;
+    left: 67.42%;
+  }
+  .star6Icon8 {
+    right: 0;
+    left: 89.89%;
+  }
+  .star6Parent,
+  .writeAReview {
+    position: absolute;
+    top: 85px;
+    left: 451px;
+    width: 97.9px;
+    height: 10.2px;
+  }
+  .writeAReview {
+    top: 73px;
+    left: 82px;
+    font-size: var(--font-size-smi);
+    line-height: 15px;
+    display: inline-block;
+    width: 462.3px;
+    height: 22.3px;
+  }
+  .ratingsItem {
+    position: absolute;
+    top: 151px;
+    left: 82px;
+    border-radius: var(--br-5xs);
+    background-color: var(--color-darkgray-200);
+    width: 37px;
+    height: 24px;
+  }
+  .cameraIcon,
+  .icon,
+  .icon1 {
+    position: absolute;
+    top: 153px;
+    left: 90px;
+    width: 20px;
+    height: 20px;
+    object-fit: cover;
+  }
+  .icon,
+  .icon1 {
+    top: 892px;
+    left: 82px;
+    border-radius: var(--br-11xs);
+    width: 65px;
+    height: 52px;
+  }
+  .icon1 {
+    left: 159px;
+    width: 66px;
+  }
+  .ratings {
+    position: relative;
+    border-radius: var(--br-xl);
+    background-color: var(--color-blanchedalmond-100);
+    width: 634px;
+    height: 1050px;
+    overflow: hidden;
+    max-width: 100%;
+    max-height: 100%;
+    text-align: left;
+    font-size: var(--font-size-2xs);
+    color: var(--color-dimgray-600);
+    font-family: var(--font-montserrat);
+  }
+  
