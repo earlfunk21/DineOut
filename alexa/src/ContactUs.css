@@ -1,0 +1,508 @@
+.groupChild,
+.loginFormInner {
+  position: absolute;
+  top: 0;
+  width: 469px;
+  height: 615px;
+}
+.groupChild {
+  left: 0;
+  border-radius: 0 var(--br-11xl) var(--br-11xl) 0;
+  background-color: var(--color-white);
+}
+.loginFormInner {
+  left: 489px;
+}
+.loginText {
+  position: absolute;
+  top: 54px;
+  left: 189px;
+  font-size: var(--font-size-29xl);
+  line-height: 20px;
+  font-family: var(--font-roboto-slab);
+  color: var(--color-black);
+}
+.instanceChild {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border-radius: var(--br-8xs);
+  border: 2px solid var(--color-white);
+  box-sizing: border-box;
+}
+.enterUsername {
+  position: absolute;
+  top: 33.27%;
+  left: 5.92%;
+  line-height: 20px;
+}
+.rectangleParent {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: var(--color-white);
+}
+.firstname {
+  position: absolute;
+  width: 55.24%;
+  top: 30.77%;
+  left: 11.59%;
+  line-height: 20px;
+  color: var(--color-dimgray-500);
+  display: inline-block;
+}
+.username,
+.username1 {
+  position: absolute;
+  top: 195px;
+  left: 66px;
+  width: 233px;
+  height: 52px;
+}
+.username1 {
+  left: 320px;
+}
+.connectWithOur {
+  position: absolute;
+  top: 105px;
+  left: 67px;
+  font-size: var(--font-size-base);
+  line-height: 20px;
+  font-family: var(--font-roboto-flex);
+  color: var(--color-black);
+  text-align: center;
+  display: inline-block;
+  width: 519px;
+}
+.signInChild {
+  top: 0;
+  left: 0;
+  border-radius: var(--br-5xs);
+  background-color: var(--color-orangered-100);
+  width: 200px;
+  height: 58px;
+}
+.send,
+.signIn,
+.signInChild {
+  position: absolute;
+}
+.send {
+  top: 19px;
+  left: 71px;
+  line-height: 20px;
+  display: inline-block;
+  width: 77px;
+  height: 19px;
+}
+.signIn {
+  top: 505px;
+  left: 66px;
+  width: 200px;
+  height: 58px;
+  cursor: pointer;
+}
+.enterUsername2 {
+  position: absolute;
+  top: 33.33%;
+  left: 5.92%;
+  line-height: 20px;
+}
+.rectangleContainer {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: var(--color-white);
+  border: 1px solid var(--color-white);
+  box-sizing: border-box;
+}
+.email {
+  position: absolute;
+  top: 267px;
+  left: 66px;
+  width: 488px;
+  height: 60px;
+  color: var(--color-dimgray-500);
+}
+.enterUsername3 {
+  position: absolute;
+  top: 33.33%;
+  left: 5.91%;
+  line-height: 20px;
+}
+.groupDiv {
+  position: absolute;
+  height: 21.46%;
+  width: 77.8%;
+  top: 56.42%;
+  right: 11.5%;
+  bottom: 22.11%;
+  left: 10.7%;
+  background-color: var(--color-white);
+}
+.whatCanWe {
+  position: absolute;
+  width: 50.3%;
+  top: 60.33%;
+  left: 15.18%;
+  line-height: 20px;
+  color: rgba(0, 0, 0, 0.66);
+  display: inline-block;
+}
+.loginForm,
+.loginTextParent {
+  position: absolute;
+  height: 615px;
+}
+.loginTextParent {
+  top: 0;
+  left: 0;
+  border-radius: var(--br-11xl) 0 0 var(--br-11xl);
+  background-color: var(--color-orange-200);
+  width: 626px;
+  overflow: hidden;
+}
+.loginForm {
+  top: 205px;
+  left: 231px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  width: 958px;
+}
+.foodPromos1,
+.navbarChild {
+  position: absolute;
+  top: 296.6px;
+  left: 809px;
+  width: 450px;
+  height: 426.7px;
+  object-fit: contain;
+}
+.navbarChild {
+  height: 100%;
+  width: 100%;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+  object-fit: cover;
+}
+.discover,
+.home,
+.randomizer {
+  position: absolute;
+  top: 75px;
+  left: calc(50% - 439.5px);
+  line-height: 21px;
+  cursor: pointer;
+}
+.discover,
+.randomizer {
+  left: calc(50% - 358.5px);
+}
+.randomizer {
+  left: calc(50% - 247.5px);
+}
+.spanIcon {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  position: absolute;
+  left: 0;
+  top: 4px;
+  transform: scale(1.364);
+}
+.locationRestaurantFood,
+.wrapperSpan {
+  position: absolute;
+  display: flex;
+  align-items: center;
+}
+.wrapperSpan {
+  top: calc(50% - 11px);
+  left: 17px;
+  width: 30px;
+  height: 22px;
+  justify-content: center;
+}
+.locationRestaurantFood {
+  top: 0;
+  left: 0;
+  width: 244px;
+  height: 18px;
+}
+.divplaceholder {
+  position: absolute;
+  width: calc(100% - 5px);
+  top: 10px;
+  right: 5px;
+  left: 0;
+  height: 18px;
+  overflow: hidden;
+}
+.input,
+.search {
+  position: absolute;
+  background-color: var(--color-white);
+}
+.input {
+  width: calc(100% - 57px);
+  top: calc(50% - 19px);
+  right: 0;
+  left: 57px;
+  height: 38px;
+}
+.search {
+  width: calc(100% - 1123px);
+  top: 52px;
+  right: 197px;
+  left: 926px;
+  border-radius: var(--br-8xs);
+  box-shadow: 2px 4px 5px rgba(204, 199, 198, 0.4);
+  height: 60px;
+  cursor: pointer;
+  text-align: left;
+  font-size: var(--font-size-base);
+  color: var(--color-dimgray-100);
+}
+.logoIcon {
+  position: absolute;
+  top: 42px;
+  left: 55px;
+  width: 239px;
+  height: 80px;
+  object-fit: cover;
+}
+.spanvuzv6 {
+  position: absolute;
+  top: calc(50% - 9.5px);
+  left: 11px;
+  width: 20px;
+  height: 22px;
+}
+.cebuCityPhilippines {
+  position: absolute;
+  top: 16px;
+  left: calc(50% - 93px);
+  line-height: 16px;
+  display: flex;
+  align-items: center;
+  width: 254px;
+  height: 25px;
+}
+.divselectorIcon {
+  position: absolute;
+  top: calc(50% - 7.5px);
+  left: 238px;
+  width: 16px;
+  height: 16px;
+}
+.imgIcon {
+  top: 16px;
+  left: calc(50% - 122px);
+  width: 21.3px;
+  height: 21.3px;
+  object-fit: cover;
+}
+.img,
+.imgIcon,
+.span1shxr {
+  position: absolute;
+}
+.img {
+  top: 5px;
+  left: calc(50% + 120px);
+  width: 14px;
+  height: 15px;
+}
+.span1shxr {
+  width: calc(100% - 70px);
+  top: calc(50% - 11.5px);
+  right: 34px;
+  left: 36px;
+  height: 20px;
+  overflow: hidden;
+}
+.imgIcon1 {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  position: absolute;
+  left: -2px;
+  top: 0;
+  transform: scale(1.342);
+}
+.wrapperImg {
+  position: absolute;
+  top: 21px;
+  left: calc(50% + 111px);
+  width: 12px;
+  height: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.location {
+  position: absolute;
+  top: calc(50% - 24px);
+  left: 631px;
+  border-radius: var(--br-9xs);
+  background-color: var(--color-white);
+  border: 2px solid var(--color-snow);
+  box-sizing: border-box;
+  width: 268px;
+  height: 59px;
+  text-align: left;
+  font-size: var(--font-size-base);
+  color: var(--color-dimgray-100);
+}
+.component1Child {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border-radius: var(--br-3xs);
+  background-color: var(--color-orangered-100);
+}
+.component1Item,
+.foodPromos71 {
+  position: absolute;
+  height: 74.68%;
+  width: 44.7%;
+  top: 11.39%;
+  right: 42.42%;
+  bottom: 13.92%;
+  left: 12.88%;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+  object-fit: cover;
+}
+.component1Item {
+  height: 32.91%;
+  width: 27.27%;
+  top: 77.22%;
+  right: -20.45%;
+  bottom: -10.13%;
+  left: 93.18%;
+  border-radius: var(--br-11xs);
+  object-fit: contain;
+}
+.component1 {
+  position: absolute;
+  top: 45px;
+  left: 1271px;
+  width: 132px;
+  height: 79px;
+  display: none;
+  cursor: pointer;
+}
+.navbar {
+  position: absolute;
+  top: 0;
+  left: -19px;
+  width: 1463px;
+  height: 156px;
+  text-align: center;
+  font-family: var(--font-inter);
+}
+.polygonIcon {
+  position: absolute;
+  height: 32.91%;
+  width: 27.27%;
+  top: 44.3%;
+  right: 6.82%;
+  bottom: 22.78%;
+  left: 65.91%;
+  border-radius: var(--br-11xs);
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+  object-fit: contain;
+}
+.component11 {
+  position: absolute;
+  top: 45px;
+  left: 1271px;
+  width: 132px;
+  height: 79px;
+  cursor: pointer;
+}
+.redRectangleFooterChild {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: var(--color-orangered-100);
+  width: 1440px;
+  height: 123px;
+}
+.dineout {
+  position: absolute;
+  top: 0;
+  left: 76px;
+  line-height: 40px;
+  display: inline-block;
+  width: 78px;
+  height: 40px;
+}
+.copyright2023,
+.dineoutParent {
+  position: absolute;
+  top: 28px;
+  width: 230px;
+}
+.copyright2023 {
+  left: 0;
+  font-size: var(--font-size-base);
+  line-height: 40px;
+  display: inline-block;
+  color: var(--color-lightgray);
+  height: 40px;
+}
+.dineoutParent {
+  left: 605px;
+  height: 68px;
+}
+.redRectangleFooter {
+  position: absolute;
+  top: 901px;
+  left: 0;
+  width: 1440px;
+  height: 123px;
+  font-family: var(--font-roboto-slab);
+}
+.m010t0534GChatIcon18sep22 {
+  position: absolute;
+  top: 219px;
+  left: 853px;
+  width: 325px;
+  height: 528px;
+}
+.contactUs {
+  position: relative;
+  background-color: var(--color-oldlace-100);
+  width: 100%;
+  height: 1024px;
+  overflow: hidden;
+  text-align: left;
+  font-size: var(--font-size-xl);
+  color: var(--color-white);
+  font-family: var(--font-roboto);
+}
